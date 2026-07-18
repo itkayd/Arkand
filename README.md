@@ -169,6 +169,26 @@ arkand-care/
   `CHOOSER_CONTENT` in `src/js/main.js`.
 - **The “A day with Arkand” scrolly panels** are plain HTML in `index.html`
   under `<section class="scrolly" …>`.
+- **How it works** (`#how-it-works`) and the **FAQ** (`#faq`) are plain HTML in
+  `index.html`. The FAQ uses native `<details>`/`<summary>` — it works without
+  JavaScript and is fully keyboard-accessible. Add a question by copying a
+  `<details class="faq-item">…</details>` block.
+
+### Adding real photos
+
+The warm illustrations sit in **photo-ready frames** (`<figure class="media-frame">`
+in `index.html` and `about.html`). To use a real, licensed photograph instead,
+replace the inline `<svg class="illus">…</svg>` with:
+
+```html
+<img class="media-photo" src="your-photo.jpg"
+     alt="A short, warm description of the photo" loading="lazy">
+```
+
+The image will cover the frame automatically. Keep `alt` text descriptive for
+screen-reader users, and compress photos (e.g. ~1600px wide, WebP/JPEG) for fast
+loading. You can add more frames anywhere using the same `.split` + `.media-frame`
+pattern.
 
 After any change, run `npm run build` and re-upload `dist/`.
 
