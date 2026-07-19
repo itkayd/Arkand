@@ -1129,18 +1129,25 @@ a { color: inherit; }
   aspect-ratio: 1;
   will-change: transform;
   transition: transform 0.35s var(--ease-warm);
-  filter: drop-shadow(0 14px 26px rgba(18, 32, 24, 0.4));
+  /* Forest "pod" backing so the cream/gold mark stays clearly visible on
+     every section — light cream, soft parchment, or deep forest green. */
+  background: radial-gradient(120% 120% at 50% 30%, #1f3a2e 0%, #122018 78%);
+  border: 1px solid rgba(204, 160, 64, 0.55);
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 16px 30px -12px rgba(18, 32, 24, 0.55),
+              0 0 0 6px rgba(250, 248, 244, 0.5);
 }
 .guide-mark canvas { width: 100% !important; height: 100% !important; display: block; }
 .guide-fallback {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: 20%;                 /* padding so the mark sits neatly within the pod */
+  width: 60%;
+  height: 60%;
   transition: opacity 0.6s var(--ease-warm);
 }
 .guide-mark.has-3d .guide-fallback { opacity: 0; }
-.guide.is-static .guide-mark { opacity: 0.9; }
+.guide.is-static .guide-mark { opacity: 0.96; }
 
 /* The Guide's gentle first-visit motion prompt (accessibility) */
 .guide-prompt {

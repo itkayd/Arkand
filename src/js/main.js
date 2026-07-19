@@ -604,16 +604,18 @@ async function initGuide() {
   const markEl = guide.querySelector('[data-guide-mark]');
   requestAnimationFrame(() => guide.classList.add('show'));
 
-  if (prefersReduced) {
-    // A calm, still presence — no travel, no spin.
-    guide.classList.add('is-static');
-    markEl.style.transform = 'translateY(40vh)';
-  } else {
-    initGuideScroll(markEl);
+  // The guide always travels with your scroll position (this is scroll-linked,
+  // so it stays comfortable even in reduced motion). Only the 3D spin/bob is
+  // switched off when motion is reduced.
+  initGuideScroll(markEl);
+
+  if (!prefersReduced) {
     try {
       const { initCompanion } = await import('./companion3d.js');
       companion = await initCompanion(markEl, { onReady: () => markEl.classList.add('has-3d') });
     } catch (e) { /* the fallback SVG simply stays */ }
+  } else {
+    guide.classList.add('is-static');
   }
 
   // Offer calmer motion on a first, full-motion visit.
@@ -686,9 +688,10 @@ function applyReducedMotion() {
 
   if (lenisRaf) { try { gsap.ticker.remove(lenisRaf); } catch (e) { /* ok */ } lenisRaf = null; }
   if (lenis) { try { lenis.destroy(); } catch (e) { /* ok */ } lenis = null; }
+  // Keep the guide following your scroll position — just stop the 3D spin/bob.
   if (companion) { companion.setPaused(true); }
-  const gm = document.querySelector('[data-guide-mark]');
-  if (gm) gm.style.transform = 'translateY(40vh)';
+  const guideEl = document.querySelector('[data-guide]');
+  if (guideEl) guideEl.classList.add('is-static');
   const dot = document.querySelector('.cursor-dot');
   if (dot) dot.classList.remove('is-active');
 }

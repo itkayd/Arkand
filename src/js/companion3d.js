@@ -74,7 +74,8 @@ export async function initCompanion(wrap, { onReady } = {}) {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
-  camera.position.set(0, 0, 7.4);
+  // Pulled back so the whole "A" sits inside the round pod with breathing room.
+  camera.position.set(0, 0, 9.4);
 
   scene.add(new THREE.AmbientLight(0xffe9c4, 0.6));
   const key = new THREE.DirectionalLight(0xffd98a, 1.4);
