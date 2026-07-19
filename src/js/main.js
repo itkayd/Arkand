@@ -542,12 +542,12 @@ function initYear() {
 }
 
 /* --------------------------------------------------------------------------
-   16. The Guide — a 3D Arkand "A" companion that travels down every page as
-       you scroll, showing you where to read. On first visit it gently offers
-       calmer motion (accessibility). Static & silent when motion is reduced.
+   16. The Guide — a glossy, glass-like Arkand "A" that travels down every page
+       as you scroll. It tilts as you read (a soft 3D lean into scroll), catches
+       a slow moving sheen, and near the foot of the page it comes alive and
+       makes the call-to-action shine. On first visit it gently offers calmer
+       motion (accessibility). Perfectly still when motion is reduced.
    -------------------------------------------------------------------------- */
-let companion = null;
-
 function buildGuideDOM() {
   const existing = document.querySelector('[data-guide]');
   if (existing) return existing;
@@ -558,65 +558,100 @@ function buildGuideDOM() {
   guide.innerHTML = `
     <div class="guide-rail">
       <div class="guide-mark" data-guide-mark>
-        <svg class="guide-fallback" viewBox="0 0 80 88" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 2 86 L 40 8 L 44 16 L 20 86 Z" fill="#F1EAD9"/>
-          <path d="M 78 86 L 40 8 L 36 16 L 60 86 Z" fill="#F1EAD9"/>
-          <path d="M 36 16 L 40 8 L 44 16 Z" fill="#B8892A"/>
-          <rect x="9" y="51.5" width="62" height="3.5" fill="#B8892A"/>
-        </svg>
+        <div class="guide-tilt" data-guide-tilt>
+          <svg class="guide-logo" viewBox="0 0 80 88" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="guideStroke" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#FBF6EA"/>
+                <stop offset="1" stop-color="#D9CFB6"/>
+              </linearGradient>
+              <linearGradient id="guideGold" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#E7C46A"/>
+                <stop offset="0.5" stop-color="#CCA040"/>
+                <stop offset="1" stop-color="#9c7622"/>
+              </linearGradient>
+            </defs>
+            <path d="M 2 86 L 40 8 L 44 16 L 20 86 Z" fill="url(#guideStroke)"/>
+            <path d="M 78 86 L 40 8 L 36 16 L 60 86 Z" fill="url(#guideStroke)"/>
+            <path d="M 36 16 L 40 8 L 44 16 Z" fill="url(#guideGold)"/>
+            <rect x="9" y="51.5" width="62" height="3.5" fill="url(#guideGold)"/>
+          </svg>
+          <span class="guide-sheen" aria-hidden="true"></span>
+          <span class="guide-gloss" aria-hidden="true"></span>
+        </div>
       </div>
     </div>`;
   document.body.appendChild(guide);
   return guide;
 }
 
-function initGuideScroll(markEl) {
+function initGuideScroll(markEl, tiltEl) {
   const rail = markEl.parentElement;
   let lastY = window.scrollY;
-  let raf = 0;
+  let tilt = 0, targetTilt = 0;
+  let raf = 0, settleRaf = 0;
+
   const apply = () => {
     raf = 0;
     const max = document.documentElement.scrollHeight - window.innerHeight;
     const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
     const travel = Math.max(0, rail.clientHeight - markEl.offsetHeight);
     markEl.style.transform = `translateY(${p * travel}px)`;
+
     const dy = window.scrollY - lastY;
     lastY = window.scrollY;
-    if (companion) companion.setLean(Math.max(-1, Math.min(1, dy / 45)));
+    if (!prefersReduced && tiltEl) {
+      targetTilt = Math.max(-16, Math.min(16, dy * 0.5));
+      if (!settleRaf) settle();
+    }
   };
+
+  // Ease the 3D lean back to rest for a soft, living feel while reading.
+  function settle() {
+    settleRaf = requestAnimationFrame(settle);
+    tilt += (targetTilt - tilt) * 0.12;
+    targetTilt *= 0.86;
+    tiltEl.style.transform = `rotateX(${-tilt}deg) rotateY(${tilt * 0.7}deg)`;
+    if (Math.abs(tilt) < 0.05 && Math.abs(targetTilt) < 0.05) {
+      tiltEl.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      cancelAnimationFrame(settleRaf);
+      settleRaf = 0;
+    }
+  }
+
   const onScroll = () => { if (!raf) raf = requestAnimationFrame(apply); };
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', apply);
   apply();
-
-  // Nod toward each heading as it comes into reading position.
-  const heads = document.querySelectorAll('main h2, main h3');
-  if (heads.length) {
-    const nio = new IntersectionObserver((entries) => {
-      entries.forEach((en) => { if (en.isIntersecting && companion) companion.nudge(1); });
-    }, { rootMargin: '-38% 0px -52% 0px', threshold: 0 });
-    heads.forEach((h) => nio.observe(h));
-  }
 }
 
-async function initGuide() {
+function initGuideFooterGlow(guide) {
+  // When the closing call-to-action / footer comes into view, the guide comes
+  // alive and the CTA buttons shine — a warm little finale.
+  const trigger = document.querySelector('.site-footer') || document.querySelector('.cta-banner');
+  if (!trigger) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      const on = en.isIntersecting;
+      guide.classList.toggle('is-near-end', on);
+      document.querySelectorAll('.zone-forest .cta-banner, .zone-deep .cta-banner, .coming-soon')
+        .forEach((el) => el.classList.toggle('cta-live', on));
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+  io.observe(trigger);
+}
+
+function initGuide() {
   const guide = buildGuideDOM();
   const markEl = guide.querySelector('[data-guide-mark]');
+  const tiltEl = guide.querySelector('[data-guide-tilt]');
   requestAnimationFrame(() => guide.classList.add('show'));
 
-  // The guide always travels with your scroll position (this is scroll-linked,
-  // so it stays comfortable even in reduced motion). Only the 3D spin/bob is
-  // switched off when motion is reduced.
-  initGuideScroll(markEl);
-
-  if (!prefersReduced) {
-    try {
-      const { initCompanion } = await import('./companion3d.js');
-      companion = await initCompanion(markEl, { onReady: () => markEl.classList.add('has-3d') });
-    } catch (e) { /* the fallback SVG simply stays */ }
-  } else {
-    guide.classList.add('is-static');
-  }
+  // Always travels with your scroll position (scroll-linked, so it stays calm
+  // even in reduced motion). The sheen/tilt/idle glimmer are motion-only.
+  initGuideScroll(markEl, tiltEl);
+  initGuideFooterGlow(guide);
+  if (prefersReduced) guide.classList.add('is-static');
 
   // Offer calmer motion on a first, full-motion visit.
   if (motionPref === null && !osReduced) {
@@ -688,8 +723,7 @@ function applyReducedMotion() {
 
   if (lenisRaf) { try { gsap.ticker.remove(lenisRaf); } catch (e) { /* ok */ } lenisRaf = null; }
   if (lenis) { try { lenis.destroy(); } catch (e) { /* ok */ } lenis = null; }
-  // Keep the guide following your scroll position — just stop the 3D spin/bob.
-  if (companion) { companion.setPaused(true); }
+  // Keep the guide following your scroll position — just still the sheen/tilt.
   const guideEl = document.querySelector('[data-guide]');
   if (guideEl) guideEl.classList.add('is-static');
   const dot = document.querySelector('.cursor-dot');

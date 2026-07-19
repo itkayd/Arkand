@@ -174,12 +174,15 @@ arkand-care/
   JavaScript and is fully keyboard-accessible. Add a question by copying a
   `<details class="faq-item">…</details>` block.
 
-### The Guide (3D companion) & motion preferences
+### The Guide & motion preferences
 
-Every page shows **the Guide** — a small 3D Arkand “A” mark that travels gently
-down the side of the page as you scroll and nods toward each section, quietly
-showing you where to read (it never displays text). It’s defined in
-`src/js/companion3d.js` and wired up in `src/js/main.js` (`initGuide`).
+Every page shows **the Guide** — a glossy, glass-like Arkand “A” that travels
+gently down the side of the page as you scroll. It leans with a soft 3D tilt as
+you read, catches a slow moving sheen, and **near the foot of the page it comes
+alive and makes the call-to-action buttons shine** — a warm little finale. It’s
+built with lightweight CSS + SVG (no WebGL needed, so it works everywhere) and
+wired up in `src/js/main.js` (`initGuide`). The home page’s big hero mark still
+uses Three.js (`src/js/hero3d.js`); every other page is Three-free and light.
 
 On a first visit the Guide offers **calmer motion** for accessibility. The
 choice is remembered (as a lightweight preference only) and can be changed any

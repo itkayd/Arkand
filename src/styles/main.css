@@ -1129,25 +1129,90 @@ a { color: inherit; }
   aspect-ratio: 1;
   will-change: transform;
   transition: transform 0.35s var(--ease-warm);
-  /* Forest "pod" backing so the cream/gold mark stays clearly visible on
-     every section — light cream, soft parchment, or deep forest green. */
-  background: radial-gradient(120% 120% at 50% 30%, #1f3a2e 0%, #122018 78%);
-  border: 1px solid rgba(204, 160, 64, 0.55);
+  perspective: 480px;                 /* gives the tilt a soft 3D feel */
+  /* A translucent forest "glass" pod so the cream/gold mark stays visible on
+     light, parchment or deep-green sections, and reads as glossy glass. */
+  background: radial-gradient(130% 120% at 50% 26%, rgba(38, 66, 52, 0.72) 0%, rgba(18, 32, 24, 0.82) 78%);
+  -webkit-backdrop-filter: blur(6px) saturate(1.1);
+  backdrop-filter: blur(6px) saturate(1.1);
+  border: 1px solid rgba(204, 160, 64, 0.5);
   border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 16px 30px -12px rgba(18, 32, 24, 0.55),
-              0 0 0 6px rgba(250, 248, 244, 0.5);
+  box-shadow: 0 16px 34px -12px rgba(18, 32, 24, 0.55),
+              inset 0 1px 1px rgba(250, 248, 244, 0.35),
+              0 0 0 5px rgba(250, 248, 244, 0.45);
 }
-.guide-mark canvas { width: 100% !important; height: 100% !important; display: block; }
-.guide-fallback {
+/* Inner wrapper that carries the reading-tilt (rotateX/Y set from JS). */
+.guide-tilt {
   position: absolute;
-  inset: 20%;                 /* padding so the mark sits neatly within the pod */
-  width: 60%;
-  height: 60%;
-  transition: opacity 0.6s var(--ease-warm);
+  inset: 21%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s var(--ease-warm);
+  will-change: transform;
 }
-.guide-mark.has-3d .guide-fallback { opacity: 0; }
+.guide-logo { width: 100%; height: 100%; display: block; overflow: visible; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35)); }
+
+/* Glossy specular highlight across the top of the glass */
+.guide-gloss {
+  position: absolute;
+  left: 8%; right: 8%; top: 6%;
+  height: 42%;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  opacity: 0.6;
+  pointer-events: none;
+}
+/* A slow sheen that glides across — the "glossy, alive" glimmer while reading */
+.guide-sheen {
+  position: absolute;
+  inset: -30%;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 244, 214, 0.55) 50%, transparent 60%);
+  transform: translateX(-120%);
+  animation: guideSheen 5.5s var(--ease-soft) infinite;
+}
+@keyframes guideSheen {
+  0%, 62% { transform: translateX(-120%); }
+  80% { transform: translateX(120%); }
+  100% { transform: translateX(120%); }
+}
 .guide.is-static .guide-mark { opacity: 0.96; }
+.guide.is-static .guide-sheen { display: none; }
+.guide.is-static .guide-tilt { transform: none !important; }
+
+/* Near the foot of the page the guide comes warmly alive (gentle 3D pulse). */
+.guide.is-near-end .guide-tilt { animation: guideFinale 2.8s var(--ease-warm) infinite; }
+.guide.is-near-end .guide-mark {
+  border-color: rgba(204, 160, 64, 0.9);
+  box-shadow: 0 16px 34px -10px rgba(18, 32, 24, 0.6),
+              inset 0 1px 1px rgba(250, 248, 244, 0.4),
+              0 0 0 5px rgba(250, 248, 244, 0.5),
+              0 0 22px rgba(204, 160, 64, 0.5);
+}
+@keyframes guideFinale {
+  0%, 100% { transform: rotateY(0deg) scale(1); }
+  25% { transform: rotateY(180deg) scale(1.04); }
+  50% { transform: rotateY(360deg) scale(1); }
+  75% { transform: rotateY(360deg) scale(1.02); }
+}
+
+/* When the closing call-to-action is in view, its buttons catch a warm shine. */
+.cta-live .btn { position: relative; overflow: hidden; }
+.cta-live .btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 36%, rgba(255, 255, 255, 0.55) 50%, transparent 64%);
+  transform: translateX(-135%);
+  animation: btnShine 2.8s var(--ease-soft) infinite;
+  pointer-events: none;
+}
+.cta-live .btn:not(.btn--ghost) {
+  box-shadow: 0 12px 34px -12px rgba(184, 137, 42, 0.9), 0 0 24px rgba(204, 160, 64, 0.35);
+}
+@keyframes btnShine {
+  0%, 55% { transform: translateX(-135%); }
+  82%, 100% { transform: translateX(135%); }
+}
 
 /* The Guide's gentle first-visit motion prompt (accessibility) */
 .guide-prompt {
