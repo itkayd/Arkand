@@ -12,13 +12,30 @@ import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* --------------------------------------------------------------------------
+   Motion preference — combines the OS setting with the visitor's own choice
+   (offered by the guide on first visit). Stored as a gentle preference only;
+   the site is fully usable without it.
+   -------------------------------------------------------------------------- */
+const osReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+const MOTION_KEY = 'arkand-motion';
+
+function readMotionPref() {
+  try { return localStorage.getItem(MOTION_KEY); } catch (e) { return null; }
+}
+function writeMotionPref(v) {
+  try { localStorage.setItem(MOTION_KEY, v); } catch (e) { /* private mode — ignore */ }
+}
+
+let motionPref = readMotionPref();                 // 'reduced' | 'full' | null
+let prefersReduced = osReduced || motionPref === 'reduced';
 
 /* --------------------------------------------------------------------------
    1. Smooth scrolling (Lenis) — soft, warm easing
    -------------------------------------------------------------------------- */
 let lenis = null;
+let lenisRaf = null;
 function initSmoothScroll() {
   if (prefersReduced) return;
   lenis = new Lenis({
@@ -29,7 +46,10 @@ function initSmoothScroll() {
   });
 
   lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  // Guard against a torn-down Lenis (e.g. when the visitor switches to
+  // calmer motion mid-session) so the ticker never touches a null instance.
+  lenisRaf = (time) => { if (lenis) lenis.raf(time * 1000); };
+  gsap.ticker.add(lenisRaf);
   gsap.ticker.lagSmoothing(0);
 
   // In-page anchor links glide smoothly.
@@ -376,19 +396,33 @@ function initContactForm() {
   const status = form.querySelector('.form-status');
   const submitBtn = form.querySelector('[type="submit"]');
   const endpoint = form.getAttribute('action') || '';
+  const isMailto = endpoint.startsWith('mailto:');
+
+  const setStatus = (msg, type) => {
+    if (!status) return;
+    status.textContent = msg;
+    status.className = `form-status is-${type}`;
+    // Bring the message into view kindly, without a jarring jump.
+    status.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'center' });
+  };
+
+  // If a no-JS visitor was returned via ?sent=1, greet them warmly.
+  if (/[?&]sent=1\b/.test(window.location.search)) {
+    setStatus('Thank you — your message is on its way. We’ll be in touch very soon, with warmth and no obligation.', 'success');
+  }
 
   form.addEventListener('submit', async (e) => {
-    // If the endpoint is still the placeholder, let the browser handle it
-    // (mailto fallback) rather than firing a broken fetch.
-    if (!endpoint || endpoint.includes('YOUR_FORM_ID') || endpoint.startsWith('mailto:')) {
-      return; // native submit / mailto
-    }
+    // ALWAYS handle the submission ourselves so the visitor is never taken
+    // away to another website — they stay right here and see a warm reply.
     e.preventDefault();
-    const setStatus = (msg, type) => {
-      if (!status) return;
-      status.textContent = msg;
-      status.className = `form-status is-${type}`;
-    };
+
+    // mailto: endpoints simply open the visitor's email app (no redirect).
+    if (isMailto) { window.location.href = endpoint; return; }
+
+    if (!endpoint || endpoint.includes('YOUR_FORM_ID')) {
+      setStatus('This form isn’t connected yet. Please call us on 020 8050 0095 or email team@arkandcare.co.uk and we’ll help straight away.', 'error');
+      return;
+    }
 
     if (submitBtn) { submitBtn.disabled = true; submitBtn.dataset.label = submitBtn.textContent; submitBtn.textContent = 'Sending…'; }
 
@@ -396,6 +430,8 @@ function initContactForm() {
       const res = await fetch(endpoint, {
         method: 'POST',
         body: new FormData(form),
+        // Accept: application/json tells Formspree/Web3Forms to reply with
+        // JSON instead of redirecting to their own thank-you page.
         headers: { Accept: 'application/json' },
       });
       if (res.ok) {
@@ -403,7 +439,7 @@ function initContactForm() {
         setStatus('Thank you — your message is on its way. We’ll be in touch very soon, with warmth and no obligation.', 'success');
       } else {
         const data = await res.json().catch(() => ({}));
-        const msg = data && data.errors ? data.errors.map((x) => x.message).join(', ') : 'Something went wrong.';
+        const msg = data && data.errors ? data.errors.map((x) => x.message).join(', ') : 'something went wrong';
         setStatus(`Sorry, we couldn’t send that (${msg}). Please call us on 020 8050 0095 and we’ll help straight away.`, 'error');
       }
     } catch (err) {
@@ -506,9 +542,180 @@ function initYear() {
 }
 
 /* --------------------------------------------------------------------------
+   16. The Guide — a 3D Arkand "A" companion that travels down every page as
+       you scroll, showing you where to read. On first visit it gently offers
+       calmer motion (accessibility). Static & silent when motion is reduced.
+   -------------------------------------------------------------------------- */
+let companion = null;
+
+function buildGuideDOM() {
+  const existing = document.querySelector('[data-guide]');
+  if (existing) return existing;
+  const guide = document.createElement('div');
+  guide.className = 'guide';
+  guide.setAttribute('data-guide', '');
+  guide.setAttribute('aria-hidden', 'true');
+  guide.innerHTML = `
+    <div class="guide-rail">
+      <div class="guide-mark" data-guide-mark>
+        <svg class="guide-fallback" viewBox="0 0 80 88" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 2 86 L 40 8 L 44 16 L 20 86 Z" fill="#F1EAD9"/>
+          <path d="M 78 86 L 40 8 L 36 16 L 60 86 Z" fill="#F1EAD9"/>
+          <path d="M 36 16 L 40 8 L 44 16 Z" fill="#B8892A"/>
+          <rect x="9" y="51.5" width="62" height="3.5" fill="#B8892A"/>
+        </svg>
+      </div>
+    </div>`;
+  document.body.appendChild(guide);
+  return guide;
+}
+
+function initGuideScroll(markEl) {
+  const rail = markEl.parentElement;
+  let lastY = window.scrollY;
+  let raf = 0;
+  const apply = () => {
+    raf = 0;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    const travel = Math.max(0, rail.clientHeight - markEl.offsetHeight);
+    markEl.style.transform = `translateY(${p * travel}px)`;
+    const dy = window.scrollY - lastY;
+    lastY = window.scrollY;
+    if (companion) companion.setLean(Math.max(-1, Math.min(1, dy / 45)));
+  };
+  const onScroll = () => { if (!raf) raf = requestAnimationFrame(apply); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', apply);
+  apply();
+
+  // Nod toward each heading as it comes into reading position.
+  const heads = document.querySelectorAll('main h2, main h3');
+  if (heads.length) {
+    const nio = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting && companion) companion.nudge(1); });
+    }, { rootMargin: '-38% 0px -52% 0px', threshold: 0 });
+    heads.forEach((h) => nio.observe(h));
+  }
+}
+
+async function initGuide() {
+  const guide = buildGuideDOM();
+  const markEl = guide.querySelector('[data-guide-mark]');
+  requestAnimationFrame(() => guide.classList.add('show'));
+
+  if (prefersReduced) {
+    // A calm, still presence — no travel, no spin.
+    guide.classList.add('is-static');
+    markEl.style.transform = 'translateY(40vh)';
+  } else {
+    initGuideScroll(markEl);
+    try {
+      const { initCompanion } = await import('./companion3d.js');
+      companion = await initCompanion(markEl, { onReady: () => markEl.classList.add('has-3d') });
+    } catch (e) { /* the fallback SVG simply stays */ }
+  }
+
+  // Offer calmer motion on a first, full-motion visit.
+  if (motionPref === null && !osReduced) {
+    setTimeout(showMotionPrompt, 1700);
+  }
+}
+
+function showMotionPrompt() {
+  if (document.querySelector('.guide-prompt')) return;
+  const prompt = document.createElement('div');
+  prompt.className = 'guide-prompt';
+  prompt.setAttribute('role', 'dialog');
+  prompt.setAttribute('aria-label', 'Comfort and motion settings');
+  prompt.innerHTML = `
+    <button class="guide-prompt-close" type="button" aria-label="Close">&times;</button>
+    <p class="guide-prompt-text">Hello — I’m your little guide. Would you like <strong>calmer motion</strong> as you browse?</p>
+    <div class="guide-prompt-actions">
+      <button type="button" class="btn btn--small" data-motion-choice="reduced">Yes, calmer</button>
+      <button type="button" class="btn btn--ghost btn--small" data-motion-choice="full">No, I’m happy</button>
+    </div>`;
+  document.body.appendChild(prompt);
+  requestAnimationFrame(() => prompt.classList.add('show'));
+
+  const dismiss = (choice) => {
+    if (choice) setMotion(choice);
+    else writeMotionPref('full'); // closed without choosing → don't ask again
+    prompt.classList.remove('show');
+    setTimeout(() => prompt.remove(), 500);
+    document.removeEventListener('keydown', onKey);
+  };
+  const onKey = (e) => { if (e.key === 'Escape') dismiss(null); };
+
+  prompt.querySelector('.guide-prompt-close').addEventListener('click', () => dismiss(null));
+  prompt.querySelectorAll('[data-motion-choice]').forEach((b) =>
+    b.addEventListener('click', () => dismiss(b.dataset.motionChoice)));
+  document.addEventListener('keydown', onKey);
+  setTimeout(() => { const f = prompt.querySelector('[data-motion-choice]'); f && f.focus(); }, 80);
+}
+
+/* Apply / persist a motion choice. */
+function setMotion(choice) {
+  writeMotionPref(choice);
+  motionPref = choice;
+  if (choice === 'reduced') {
+    if (!prefersReduced) applyReducedMotion();
+  } else if (prefersReduced && !osReduced) {
+    // Turning motion back on from a reduced state — reload for a clean start.
+    window.location.reload();
+    return;
+  }
+  updateMotionToggle();
+}
+
+/* Gracefully switch the running page to reduced motion, no reload needed. */
+function applyReducedMotion() {
+  prefersReduced = true;
+  document.documentElement.classList.add('reduced-motion');
+
+  document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-visible'));
+  document.querySelectorAll('[data-reveal-stagger] > *').forEach((el) => { el.style.opacity = '1'; el.style.transform = 'none'; });
+  document.querySelectorAll('[data-count]').forEach((el) => {
+    const d = parseInt(el.dataset.decimals || '0', 10);
+    el.textContent = parseFloat(el.dataset.count).toFixed(d) + (el.dataset.suffix || '');
+  });
+
+  try { ScrollTrigger.getAll().forEach((t) => t.kill()); } catch (e) { /* ok */ }
+  try { gsap.set('.hero-content, [data-parallax], .scrolly-panel', { clearProps: 'transform,opacity' }); } catch (e) { /* ok */ }
+  document.querySelectorAll('.scrolly-panel').forEach((p) => (p.style.opacity = '1'));
+
+  if (lenisRaf) { try { gsap.ticker.remove(lenisRaf); } catch (e) { /* ok */ } lenisRaf = null; }
+  if (lenis) { try { lenis.destroy(); } catch (e) { /* ok */ } lenis = null; }
+  if (companion) { companion.setPaused(true); }
+  const gm = document.querySelector('[data-guide-mark]');
+  if (gm) gm.style.transform = 'translateY(40vh)';
+  const dot = document.querySelector('.cursor-dot');
+  if (dot) dot.classList.remove('is-active');
+}
+
+/* Persistent motion toggle in the footer so anyone can change their mind. */
+function initMotionToggle() {
+  const bottom = document.querySelector('.footer-bottom');
+  if (!bottom || bottom.querySelector('.motion-toggle')) return;
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'motion-toggle';
+  bottom.appendChild(btn);
+  btn.addEventListener('click', () => setMotion(prefersReduced ? 'full' : 'reduced'));
+  updateMotionToggle();
+}
+function updateMotionToggle() {
+  const btn = document.querySelector('.motion-toggle');
+  if (!btn) return;
+  btn.textContent = prefersReduced ? 'Gentle motion is off — turn on' : 'Prefer calmer motion?';
+  btn.setAttribute('aria-pressed', String(prefersReduced));
+}
+
+/* --------------------------------------------------------------------------
    Boot
    -------------------------------------------------------------------------- */
 function boot() {
+  if (prefersReduced) document.documentElement.classList.add('reduced-motion');
   initSmoothScroll();
   initHeader();
   initMobileMenu();
@@ -524,6 +731,8 @@ function boot() {
   initPageTransitions();
   initYear();
   initHero3DIfPresent();
+  initGuide();
+  initMotionToggle();
 
   // Recalculate triggers after fonts settle to avoid layout jumps.
   if (document.fonts && document.fonts.ready) {

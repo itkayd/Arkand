@@ -15,8 +15,8 @@
   <meta property="og:title" content="Contact Arkand Care" />
   <meta property="og:description" content="A friendly, no-obligation chat — wherever you are. Delivered with dignity." />
   <meta property="og:image" content="https://arkandcare.co.uk/arkand-logo.png" />
-  <script type="module" crossorigin src="./assets/main-Bn952MBd.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-Crry_Dx-.css">
+  <script type="module" crossorigin src="./assets/main-vojQiA-Y.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-GWDh-Vw0.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -104,7 +104,7 @@
     </section>
 
     <!-- CONTACT FORM -->
-    <section class="section">
+    <section class="section" id="send">
       <div class="container narrow">
         <div class="section-head" data-reveal>
           <p class="eyebrow">Send us a message</p>
@@ -171,6 +171,10 @@
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" />
           <!-- Friendly email subject line for the inbox -->
           <input type="hidden" name="_subject" value="New enquiry from the Arkand Care website" />
+          <!-- Safety net: if JavaScript is unavailable, Formspree returns the
+               visitor to OUR OWN site (not a Formspree page). Update the domain
+               here if the site is hosted elsewhere. -->
+          <input type="hidden" name="_next" value="https://arkandcare.co.uk/contact.html?sent=1#send" />
 
           <button type="submit" class="btn" data-magnetic>Send message <span class="arrow" aria-hidden="true">→</span></button>
           <p class="form-note">By sending this, you’re simply asking us to get in

@@ -174,6 +174,33 @@ arkand-care/
   JavaScript and is fully keyboard-accessible. Add a question by copying a
   `<details class="faq-item">…</details>` block.
 
+### The Guide (3D companion) & motion preferences
+
+Every page shows **the Guide** — a small 3D Arkand “A” mark that travels gently
+down the side of the page as you scroll and nods toward each section, quietly
+showing you where to read (it never displays text). It’s defined in
+`src/js/companion3d.js` and wired up in `src/js/main.js` (`initGuide`).
+
+On a first visit the Guide offers **calmer motion** for accessibility. The
+choice is remembered (as a lightweight preference only) and can be changed any
+time via the **“Prefer calmer motion?”** toggle in the footer. Calmer motion:
+
+- respects the operating-system “reduce motion” setting automatically;
+- stills the Guide, stops smooth scrolling, and reveals all content without
+  animation;
+- can be turned on mid-visit with no page reload.
+
+If WebGL is unavailable or motion is reduced, the Guide falls back to a calm,
+static branded mark — the site always works perfectly either way.
+
+### Contact form — stays on your site
+
+The form **never redirects the visitor to another website**. It submits quietly
+in the background (AJAX) and shows a warm confirmation in place. As a safety net
+for the rare no-JavaScript case, a hidden `_next` field returns the visitor to
+`contact.html` on your own domain — update that domain in `contact.html` if you
+host the site elsewhere.
+
 ### Adding real photos
 
 The warm illustrations sit in **photo-ready frames** (`<figure class="media-frame">`
