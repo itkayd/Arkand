@@ -174,15 +174,24 @@ arkand-care/
   JavaScript and is fully keyboard-accessible. Add a question by copying a
   `<details class="faq-item">…</details>` block.
 
-### The Guide & motion preferences
+### Warm “glass” design & motion preferences
 
-Every page shows **the Guide** — a glossy, glass-like Arkand “A” that travels
-gently down the side of the page as you scroll. It leans with a soft 3D tilt as
-you read, catches a slow moving sheen, and **near the foot of the page it comes
-alive and makes the call-to-action buttons shine** — a warm little finale. It’s
-built with lightweight CSS + SVG (no WebGL needed, so it works everywhere) and
-wired up in `src/js/main.js` (`initGuide`). The home page’s big hero mark still
-uses Three.js (`src/js/hero3d.js`); every other page is Three-free and light.
+The whole site uses a **warm glass** aesthetic (Apple-inspired, but tinted with
+the Arkand cream/forest/gold palette rather than cold blue-grey): a soft,
+branded **aurora** background drifts behind the page, and the surfaces above it
+— the floating header, cards, panels, form fields, contact cards, mobile menu
+and footer — are **frosted, translucent glass**. Tokens live at the top of
+`src/styles/main.css` (`--glass-bg`, `--glass-border`, `--glass-blur`…), with a
+graceful `@supports` fallback for browsers without backdrop-blur.
+
+On a first, full-motion visit a gentle prompt offers **calmer motion** for
+accessibility. The choice persists and can be changed any time via the **“Prefer
+calmer motion?”** toggle in the footer. Calmer motion respects the OS
+“reduce motion” setting automatically and stills the aurora and reveals.
+
+Near the foot of the page the closing call-to-action buttons catch a warm
+glass shine. The home page’s big hero mark still uses Three.js
+(`src/js/hero3d.js`); every other page is Three-free and light.
 
 On a first visit the Guide offers **calmer motion** for accessibility. The
 choice is remembered (as a lightweight preference only) and can be changed any

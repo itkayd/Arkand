@@ -542,121 +542,26 @@ function initYear() {
 }
 
 /* --------------------------------------------------------------------------
-   16. The Guide — a glossy, glass-like Arkand "A" that travels down every page
-       as you scroll. It tilts as you read (a soft 3D lean into scroll), catches
-       a slow moving sheen, and near the foot of the page it comes alive and
-       makes the call-to-action shine. On first visit it gently offers calmer
-       motion (accessibility). Perfectly still when motion is reduced.
+   16. Comfort prompt + CTA shine
+       On a first, full-motion visit we gently offer calmer motion. Near the
+       foot of the page the closing call-to-action catches a warm glass shine.
    -------------------------------------------------------------------------- */
-function buildGuideDOM() {
-  const existing = document.querySelector('[data-guide]');
-  if (existing) return existing;
-  const guide = document.createElement('div');
-  guide.className = 'guide';
-  guide.setAttribute('data-guide', '');
-  guide.setAttribute('aria-hidden', 'true');
-  guide.innerHTML = `
-    <div class="guide-rail">
-      <div class="guide-mark" data-guide-mark>
-        <div class="guide-tilt" data-guide-tilt>
-          <svg class="guide-logo" viewBox="0 0 80 88" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="guideStroke" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#FBF6EA"/>
-                <stop offset="1" stop-color="#D9CFB6"/>
-              </linearGradient>
-              <linearGradient id="guideGold" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#E7C46A"/>
-                <stop offset="0.5" stop-color="#CCA040"/>
-                <stop offset="1" stop-color="#9c7622"/>
-              </linearGradient>
-            </defs>
-            <path d="M 2 86 L 40 8 L 44 16 L 20 86 Z" fill="url(#guideStroke)"/>
-            <path d="M 78 86 L 40 8 L 36 16 L 60 86 Z" fill="url(#guideStroke)"/>
-            <path d="M 36 16 L 40 8 L 44 16 Z" fill="url(#guideGold)"/>
-            <rect x="9" y="51.5" width="62" height="3.5" fill="url(#guideGold)"/>
-          </svg>
-          <span class="guide-sheen" aria-hidden="true"></span>
-          <span class="guide-gloss" aria-hidden="true"></span>
-        </div>
-      </div>
-    </div>`;
-  document.body.appendChild(guide);
-  return guide;
-}
-
-function initGuideScroll(markEl, tiltEl) {
-  const rail = markEl.parentElement;
-  let lastY = window.scrollY;
-  let tilt = 0, targetTilt = 0;
-  let raf = 0, settleRaf = 0;
-
-  const apply = () => {
-    raf = 0;
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
-    const travel = Math.max(0, rail.clientHeight - markEl.offsetHeight);
-    markEl.style.transform = `translateY(${p * travel}px)`;
-
-    const dy = window.scrollY - lastY;
-    lastY = window.scrollY;
-    if (!prefersReduced && tiltEl) {
-      targetTilt = Math.max(-16, Math.min(16, dy * 0.5));
-      if (!settleRaf) settle();
-    }
-  };
-
-  // Ease the 3D lean back to rest for a soft, living feel while reading.
-  function settle() {
-    settleRaf = requestAnimationFrame(settle);
-    tilt += (targetTilt - tilt) * 0.12;
-    targetTilt *= 0.86;
-    tiltEl.style.transform = `rotateX(${-tilt}deg) rotateY(${tilt * 0.7}deg)`;
-    if (Math.abs(tilt) < 0.05 && Math.abs(targetTilt) < 0.05) {
-      tiltEl.style.transform = 'rotateX(0deg) rotateY(0deg)';
-      cancelAnimationFrame(settleRaf);
-      settleRaf = 0;
-    }
+function initMotionPrompt() {
+  if (motionPref === null && !osReduced) {
+    setTimeout(showMotionPrompt, 1600);
   }
-
-  const onScroll = () => { if (!raf) raf = requestAnimationFrame(apply); };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', apply);
-  apply();
 }
 
-function initGuideFooterGlow(guide) {
-  // When the closing call-to-action / footer comes into view, the guide comes
-  // alive and the CTA buttons shine — a warm little finale.
+function initCtaShine() {
   const trigger = document.querySelector('.site-footer') || document.querySelector('.cta-banner');
   if (!trigger) return;
+  const targets = document.querySelectorAll('.zone-forest .cta-banner, .zone-deep .cta-banner, .coming-soon');
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
-      const on = en.isIntersecting;
-      guide.classList.toggle('is-near-end', on);
-      document.querySelectorAll('.zone-forest .cta-banner, .zone-deep .cta-banner, .coming-soon')
-        .forEach((el) => el.classList.toggle('cta-live', on));
+      targets.forEach((el) => el.classList.toggle('cta-live', en.isIntersecting));
     });
   }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
   io.observe(trigger);
-}
-
-function initGuide() {
-  const guide = buildGuideDOM();
-  const markEl = guide.querySelector('[data-guide-mark]');
-  const tiltEl = guide.querySelector('[data-guide-tilt]');
-  requestAnimationFrame(() => guide.classList.add('show'));
-
-  // Always travels with your scroll position (scroll-linked, so it stays calm
-  // even in reduced motion). The sheen/tilt/idle glimmer are motion-only.
-  initGuideScroll(markEl, tiltEl);
-  initGuideFooterGlow(guide);
-  if (prefersReduced) guide.classList.add('is-static');
-
-  // Offer calmer motion on a first, full-motion visit.
-  if (motionPref === null && !osReduced) {
-    setTimeout(showMotionPrompt, 1700);
-  }
 }
 
 function showMotionPrompt() {
@@ -667,7 +572,7 @@ function showMotionPrompt() {
   prompt.setAttribute('aria-label', 'Comfort and motion settings');
   prompt.innerHTML = `
     <button class="guide-prompt-close" type="button" aria-label="Close">&times;</button>
-    <p class="guide-prompt-text">Hello — I’m your little guide. Would you like <strong>calmer motion</strong> as you browse?</p>
+    <p class="guide-prompt-text">A note on comfort — would you like <strong>calmer motion</strong> as you browse?</p>
     <div class="guide-prompt-actions">
       <button type="button" class="btn btn--small" data-motion-choice="reduced">Yes, calmer</button>
       <button type="button" class="btn btn--ghost btn--small" data-motion-choice="full">No, I’m happy</button>
@@ -723,9 +628,6 @@ function applyReducedMotion() {
 
   if (lenisRaf) { try { gsap.ticker.remove(lenisRaf); } catch (e) { /* ok */ } lenisRaf = null; }
   if (lenis) { try { lenis.destroy(); } catch (e) { /* ok */ } lenis = null; }
-  // Keep the guide following your scroll position — just still the sheen/tilt.
-  const guideEl = document.querySelector('[data-guide]');
-  if (guideEl) guideEl.classList.add('is-static');
   const dot = document.querySelector('.cursor-dot');
   if (dot) dot.classList.remove('is-active');
 }
@@ -768,7 +670,8 @@ function boot() {
   initPageTransitions();
   initYear();
   initHero3DIfPresent();
-  initGuide();
+  initMotionPrompt();
+  initCtaShine();
   initMotionToggle();
 
   // Recalculate triggers after fonts settle to avoid layout jumps.
