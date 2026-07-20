@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://arkandcare.co.uk/sitemap.xml
