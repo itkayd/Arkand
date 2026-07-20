@@ -38,6 +38,17 @@
   --gold-ink:      #7F5A0F; /* 5.9:1 cream · 5.1:1 parchment */
   --taupe-ink:     #6E6357; /* 5.5:1 cream · 4.8:1 parchment */
 
+  /* "Warm glass" — frosted, translucent, light-catching (Apple-style, but with
+     a cosy cream/forest tint rather than cold blue-grey). */
+  --glass-bg:        rgba(250, 248, 244, 0.62);
+  --glass-bg-strong: rgba(250, 248, 244, 0.74);
+  --glass-border:    rgba(255, 255, 255, 0.6);
+  --glass-hi:        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  --glass-blur:      blur(18px) saturate(1.4);
+  /* Glass over dark forest sections */
+  --glass-dark-bg:     rgba(250, 248, 244, 0.09);
+  --glass-dark-border: rgba(250, 248, 244, 0.18);
+
   /* Semantic roles */
   --bg:            var(--cream);
   --bg-panel:      var(--parchment);
@@ -285,12 +296,29 @@ a { color: inherit; }
   transition: background-color 0.5s var(--ease-warm), backdrop-filter 0.5s,
               box-shadow 0.5s, height 0.4s var(--ease-warm);
 }
+/* When you scroll, the bar lifts into a floating pane of warm frosted glass. */
 .site-header.scrolled {
-  background: rgba(250, 248, 244, 0.86);
-  backdrop-filter: saturate(1.2) blur(14px);
-  -webkit-backdrop-filter: saturate(1.2) blur(14px);
-  box-shadow: 0 1px 0 rgba(27, 48, 40, 0.08);
-  height: 70px;
+  background: transparent;
+  box-shadow: none;
+  height: 80px;
+}
+.site-header.scrolled .header-inner {
+  max-width: min(1180px, calc(100% - 2rem));
+  margin-top: 12px;
+  padding-block: 0.6rem;
+  padding-inline: clamp(1rem, 3vw, 1.6rem);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 22px 45px -24px rgba(18, 32, 24, 0.5), var(--glass-hi);
+  transition: background-color 0.5s var(--ease-warm), box-shadow 0.5s var(--ease-warm),
+              padding 0.4s var(--ease-warm), margin 0.4s var(--ease-warm);
+}
+/* Older browsers with no backdrop-filter get a solid-enough fallback. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header.scrolled .header-inner { background: var(--glass-bg-strong); }
 }
 /* On forest hero pages, header starts transparent over dark bg */
 .site-header.on-dark:not(.scrolled) .brand-name { color: var(--cream); }
@@ -305,6 +333,9 @@ a { color: inherit; }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: background-color 0.5s var(--ease-warm), box-shadow 0.5s var(--ease-warm),
+              padding 0.4s var(--ease-warm), margin 0.4s var(--ease-warm),
+              max-width 0.4s var(--ease-warm), border-color 0.5s var(--ease-warm);
   gap: var(--space-md);
 }
 
@@ -868,15 +899,22 @@ a { color: inherit; }
   gap: var(--space-md);
 }
 .card {
-  background: var(--cream);
+  /* Warm frosted glass */
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
   border-radius: var(--radius-lg);
   padding: clamp(1.5rem, 3vw, 2.25rem);
-  border: 1px solid rgba(27,48,40,0.07);
-  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft), var(--glass-hi);
   position: relative;
   overflow: hidden;
-  transition: transform 0.6s var(--ease-warm), box-shadow 0.6s var(--ease-warm);
+  transition: transform 0.6s var(--ease-warm), box-shadow 0.6s var(--ease-warm),
+              background-color 0.6s var(--ease-warm);
   isolation: isolate;
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .card { background: var(--glass-bg-strong); }
 }
 .card::before {
   content: "";
@@ -905,9 +943,18 @@ a { color: inherit; }
 .card p { color: var(--text-soft); margin: 0; font-size: var(--step--1); line-height: 1.55; }
 
 .zone-forest .card, .zone-deep .card {
-  background: rgba(250,248,244,0.04);
-  border-color: rgba(250,248,244,0.1);
-  box-shadow: none;
+  background: var(--glass-dark-bg);
+  border-color: var(--glass-dark-border);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+/* A soft warm "aurora" behind the home service cards, so the frosted glass has
+   gentle colour to refract — the effect that makes glass feel alive. */
+#services {
+  background:
+    radial-gradient(60% 55% at 12% 8%, rgba(184, 137, 42, 0.13), transparent 60%),
+    radial-gradient(55% 55% at 92% 96%, rgba(92, 61, 82, 0.12), transparent 62%),
+    radial-gradient(50% 50% at 70% 30%, rgba(27, 48, 40, 0.06), transparent 60%);
 }
 .zone-forest .card h3, .zone-deep .card h3 { color: var(--cream); }
 .zone-forest .card p, .zone-deep .card p { color: rgba(250,248,244,0.75); }
