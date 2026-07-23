@@ -147,8 +147,9 @@
                 <p style="margin-top:0.4rem;">Something went wrong at our end. Please call us on <a href="tel:+442080500095">020 8050 0095</a> or email <a href="mailto:team@arkandcare.co.uk">team@arkandcare.co.uk</a> and we'll pick it up straight away.</p>
               </div>
 
-              <!-- data-endpoint: paste your Formspree/Web3Forms URL here to make the form deliver. Empty = shows confirmation only. See README. -->
-              <form class="form" data-enquiry data-endpoint="" method="post" novalidate style="margin-top:1.5rem;">
+              <!-- Formspree endpoint. Submits via fetch in assets/js/arkand.js (Accept: application/json). -->
+              <form class="form" data-enquiry data-endpoint="https://formspree.io/f/mdaqwoap" action="https://formspree.io/f/mdaqwoap" method="post" novalidate style="margin-top:1.5rem;">
+                <input type="hidden" name="_subject" value="New enquiry from the Arkand Care website">
                 <div class="field">
                   <label for="name">Your name</label>
                   <input id="name" name="name" type="text" autocomplete="name" required aria-required="true">
@@ -184,10 +185,10 @@
                   <span class="error" role="alert" aria-live="assertive"></span>
                 </div>
 
-                <!-- Honeypot: hidden from real users; bots that fill it are silently ignored. -->
+                <!-- Honeypot: hidden from real users. Named _gotcha so Formspree drops it server-side too; the JS also drops it before sending. -->
                 <div class="hp" aria-hidden="true">
                   <label for="company">Company (leave blank)</label>
-                  <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
+                  <input id="company" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
                 </div>
 
                 <button class="btn btn--primary" type="submit">Send enquiry</button>

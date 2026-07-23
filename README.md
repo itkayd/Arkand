@@ -54,18 +54,23 @@ no placeholders in shipped text.
    resolve. If you launch on a different domain, find-and-replace
    `https://arkandcare.co.uk` across the HTML, `sitemap.xml` and `robots.txt`.
 
-2. **Enquiry form endpoint.** The contact form validates in the browser,
-   blocks spam with a honeypot, and shows a confirmation — but it does **not**
-   deliver anywhere until you give it an endpoint. To wire it up:
-   open `contact.html`, find the form's `data-endpoint=""` attribute, and paste
-   your form handler URL (e.g. a Formspree or Web3Forms endpoint) between the
-   quotes. Once set, `assets/js/arkand.js` submits via `fetch` and shows a real
-   **success** state on delivery or a graceful **error** state (with the phone
-   number) if it fails — the sender is never wrongly told it sent. While the
-   attribute is empty, the form just shows the confirmation. Because the form
-   can carry health information, make sure the handler stores/transmits it
-   securely and matches the Privacy Notice, and send one live test to
-   team@arkandcare.co.uk before launch.
+2. **Enquiry form endpoint — wired to Formspree.** The contact form now posts
+   to the Formspree endpoint `https://formspree.io/f/mdaqwoap`
+   (`data-endpoint` on the form in `contact.html`). `assets/js/arkand.js`
+   validates, drops honeypot spam, then submits via `fetch` with
+   `Accept: application/json`, showing a real **success** state on delivery or
+   a graceful **error** state (with the phone number) if it fails. There is
+   also a native `action="…"` fallback so the form still delivers if JavaScript
+   is off. `_gotcha` is Formspree's server-side honeypot; `_subject` sets the
+   notification email subject.
+   - **Before launch you must:** (a) submit the live form once and click the
+     confirmation link Formspree emails you the first time, to activate it;
+     (b) confirm the enquiry lands in the inbox connected to the Formspree form,
+     and set that inbox to **team@arkandcare.co.uk** in Formspree's settings;
+     (c) because submissions can include health information, check that this is
+     acceptable under the Privacy Notice (Formspree is then a data processor —
+     it is named generically as "a service provider that helps us run our
+     email" in `privacy.html`; consider naming it explicitly).
 
    > **Design-system reconciliation (July 2026 review).** After the pre-launch
    > review, these changes were applied: corrected `--forest-deep` to `#122018`;
