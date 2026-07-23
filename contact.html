@@ -19,8 +19,8 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/assets/img/arkand-mark.png">
-  <meta name="theme-color" content="#132119">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <meta name="theme-color" content="#122018">
 
   <link rel="preload" href="/assets/fonts/dmsans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/playfair.woff2" as="font" type="font/woff2" crossorigin>
@@ -139,30 +139,35 @@
               <p style="margin-top:0.5rem;color:#3f3f3d;">Tell us as much or as little as you like. There's no obligation.</p>
 
               <div id="form-ok" class="form-ok" hidden>
-                <strong>Thank you — your enquiry is ready to send.</strong>
-                <p style="margin-top:0.4rem;">We'll be in touch shortly. If it's urgent, please call <a href="tel:+442080500095">020 8050 0095</a>.</p>
+                <strong>Thank you — we've got your message and we'll be in touch very soon.</strong>
+                <p style="margin-top:0.4rem;">If it's urgent, please call <a href="tel:+442080500095">020 8050 0095</a>.</p>
+              </div>
+              <div id="form-err" class="form-err" hidden role="alert">
+                <strong>Sorry — that didn't send.</strong>
+                <p style="margin-top:0.4rem;">Something went wrong at our end. Please call us on <a href="tel:+442080500095">020 8050 0095</a> or email <a href="mailto:team@arkandcare.co.uk">team@arkandcare.co.uk</a> and we'll pick it up straight away.</p>
               </div>
 
-              <form class="form" data-enquiry method="post" novalidate style="margin-top:1.5rem;">
+              <!-- data-endpoint: paste your Formspree/Web3Forms URL here to make the form deliver. Empty = shows confirmation only. See README. -->
+              <form class="form" data-enquiry data-endpoint="" method="post" novalidate style="margin-top:1.5rem;">
                 <div class="field">
                   <label for="name">Your name</label>
-                  <input id="name" name="name" type="text" autocomplete="name" required>
-                  <span class="error" aria-live="polite"></span>
+                  <input id="name" name="name" type="text" autocomplete="name" required aria-required="true">
+                  <span class="error" role="alert" aria-live="assertive"></span>
                 </div>
                 <div class="field">
                   <label for="phone">Phone</label>
                   <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
                   <span class="hint">A phone number or email — whichever suits you.</span>
-                  <span class="error" aria-live="polite"></span>
+                  <span class="error" role="alert" aria-live="assertive"></span>
                 </div>
                 <div class="field">
                   <label for="email">Email</label>
                   <input id="email" name="email" type="email" autocomplete="email">
-                  <span class="error" aria-live="polite"></span>
+                  <span class="error" role="alert" aria-live="assertive"></span>
                 </div>
                 <div class="field">
                   <label for="relationship">Who is the care for?</label>
-                  <input id="relationship" name="relationship" type="text" placeholder="e.g. my mother, myself">
+                  <input id="relationship" name="relationship" type="text" autocomplete="off" placeholder="e.g. my mother, myself">
                   <span class="hint">Optional. It helps us prepare for the call.</span>
                 </div>
                 <div class="field">
@@ -173,10 +178,16 @@
 
                 <div class="field">
                   <div class="consent">
-                    <input id="consent" name="consent" type="checkbox" required>
+                    <input id="consent" name="consent" type="checkbox" required aria-required="true">
                     <label for="consent">I'm happy for Arkand Care to use the details I've given — which may include information about someone's health — to respond to this enquiry. I've read the <a class="inline-link" href="/privacy.html">Privacy Notice</a>.</label>
                   </div>
-                  <span class="error" aria-live="polite"></span>
+                  <span class="error" role="alert" aria-live="assertive"></span>
+                </div>
+
+                <!-- Honeypot: hidden from real users; bots that fill it are silently ignored. -->
+                <div class="hp" aria-hidden="true">
+                  <label for="company">Company (leave blank)</label>
+                  <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
                 </div>
 
                 <button class="btn btn--primary" type="submit">Send enquiry</button>
@@ -222,6 +233,7 @@
         Registered office: 66 Paul Street, London EC2A 4NA ·
         <a href="tel:+442080500095">020 8050 0095</a> ·
         <a href="mailto:team@arkandcare.co.uk">team@arkandcare.co.uk</a>
+        <p style="margin-top:0.5rem;">Companionship &amp; home help · Personal care coming soon, subject to CQC registration.</p>
         <p style="margin-top:0.75rem;">© <span id="year">2026</span> Arkand Care Ltd. Arkand Care Ltd is registered at Companies House in England and Wales. We are not registered with the Care Quality Commission and do not provide personal care.</p>
       </div>
     </div>

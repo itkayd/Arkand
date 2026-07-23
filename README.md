@@ -54,14 +54,29 @@ no placeholders in shipped text.
    resolve. If you launch on a different domain, find-and-replace
    `https://arkandcare.co.uk` across the HTML, `sitemap.xml` and `robots.txt`.
 
-2. **Enquiry form endpoint.** The contact form has no backend. As shipped it
-   validates in the browser and shows a confirmation message; it does **not**
-   deliver the enquiry anywhere yet. Wire it up before launch — e.g. add an
-   `action="…"` pointing at a form handler (Formspree, a Vercel serverless
-   function, etc.). The client-side validation in `assets/js/arkand.js` runs
-   first and then submits normally once an `action` is present. Because the
-   form can carry health information, make sure the handler stores/transmits it
-   securely and that its data handling matches the Privacy Notice.
+2. **Enquiry form endpoint.** The contact form validates in the browser,
+   blocks spam with a honeypot, and shows a confirmation — but it does **not**
+   deliver anywhere until you give it an endpoint. To wire it up:
+   open `contact.html`, find the form's `data-endpoint=""` attribute, and paste
+   your form handler URL (e.g. a Formspree or Web3Forms endpoint) between the
+   quotes. Once set, `assets/js/arkand.js` submits via `fetch` and shows a real
+   **success** state on delivery or a graceful **error** state (with the phone
+   number) if it fails — the sender is never wrongly told it sent. While the
+   attribute is empty, the form just shows the confirmation. Because the form
+   can carry health information, make sure the handler stores/transmits it
+   securely and matches the Privacy Notice, and send one live test to
+   team@arkandcare.co.uk before launch.
+
+   > **Design-system reconciliation (July 2026 review).** After the pre-launch
+   > review, these changes were applied: corrected `--forest-deep` to `#122018`;
+   > moved gold link text off cream to forest + gold underline (WCAG AA);
+   > removed "hospital discharge" from the coming-soon lists; added the
+   > statutory "Companionship & home help · Personal care coming soon…" footer
+   > line site-wide; added a custom `404.html`, an `.htaccess` (Apache 404 +
+   > caching), and a square 180×180 apple-touch-icon; hardened the enquiry form.
+   > The **named service areas** (Chelmsford + villages + `areas.html`) are kept
+   > deliberately, by decision, overriding the design system's "no service
+   > areas" standing decision in favour of local search visibility.
 
 3. **Opening hours.** The JSON-LD advertises `Mo-Su 08:00-20:00` as a
    reasonable default. Confirm these are the hours you want published, or edit

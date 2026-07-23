@@ -101,18 +101,47 @@
         return;
       }
 
-      /* No backend is wired up in this static build. Prevent a broken POST
-         and show a clear confirmation; see README for wiring the endpoint. */
-      if (!form.getAttribute("action")) {
+      /* Honeypot: a real person never fills #company. If it's filled, it's a
+         bot — quietly pretend success and send nothing. */
+      var hp = form.querySelector("#company");
+      var okBox = document.getElementById("form-ok");
+      var errBox = document.getElementById("form-err");
+      var showOk = function () {
+        if (errBox) errBox.hidden = true;
+        if (okBox) { okBox.hidden = false; okBox.setAttribute("tabindex", "-1"); okBox.focus(); }
+        form.reset();
+      };
+      var showErr = function () {
+        if (errBox) { errBox.hidden = false; errBox.setAttribute("tabindex", "-1"); errBox.focus(); }
+      };
+
+      if (hp && hp.value) { e.preventDefault(); showOk(); return; }
+
+      var endpoint = form.getAttribute("data-endpoint");
+
+      /* No endpoint configured yet: don't POST into the void — show the
+         confirmation. Wire data-endpoint (see README) before launch. */
+      if (!endpoint) {
         e.preventDefault();
-        var okBox = document.getElementById("form-ok");
-        if (okBox) {
-          okBox.hidden = false;
-          okBox.setAttribute("tabindex", "-1");
-          okBox.focus();
-          form.reset();
-        }
+        showOk();
+        return;
       }
+
+      /* Endpoint configured: submit via fetch so we can show a real success
+         OR a graceful error with the phone number — the user is never left
+         wrongly believing it sent. */
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+      fetch(endpoint, {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: new FormData(form)
+      }).then(function (res) {
+        if (res.ok) showOk(); else showErr();
+      }).catch(showErr).then(function () {
+        if (btn) { btn.disabled = false; btn.textContent = "Send enquiry"; }
+      });
     });
   }
 
