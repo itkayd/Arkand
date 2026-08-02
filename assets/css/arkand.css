@@ -712,6 +712,32 @@ h3.display { font-size: var(--step-2); letter-spacing: -0.01em; }
 .faq details[open] summary::after { content: "\2212"; }
 .faq details p { margin-top: 0.8rem; color: #3f3f3d; max-width: var(--measure); }
 
+/* ---- Flexibility callout (parchment, gold left rule) ------------------ */
+.callout {
+  background: var(--parchment);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--r-md);
+  padding: clamp(1.4rem, 3vw, 2rem);
+  box-shadow: var(--lift-1);
+}
+.callout h2 { color: var(--forest); }
+.callout p { color: #3f3f3d; max-width: var(--measure); }
+
+/* ---- Prose lists & headings (legal / policy pages) -------------------- */
+.prose h2 { margin-top: 1.9rem; }
+.prose h2:first-child { margin-top: 0; }
+.prose ul { margin-top: 1rem; padding-left: 1.25rem; }
+.prose li { margin-top: 0.5rem; }
+.prose li::marker { color: var(--gold); }
+
+/* ---- Nav: keep 7 items + CTA on one line at mid widths --------------- */
+@media (min-width: 861px) and (max-width: 1150px) {
+  .nav { gap: 0.5rem; }
+  .nav__links { gap: 0.1rem; }
+  .nav__links a { padding: 0.55rem 0.6rem; font-size: 0.95rem; }
+  .nav__cta { font-size: 0.95rem; padding: 0.6rem 1rem; min-height: 44px; }
+}
+
 /* =========================================================================
    Accessibility & resilience
    ========================================================================= */

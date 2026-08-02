@@ -9,4 +9,8 @@
   <url><loc>https://arkandcare.co.uk/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://arkandcare.co.uk/accessibility.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://arkandcare.co.uk/complaints.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://arkandcare.co.uk/why-arkand.html</loc><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://arkandcare.co.uk/safeguarding.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://arkandcare.co.uk/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://arkandcare.co.uk/cookies.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
