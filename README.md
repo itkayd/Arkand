@@ -245,8 +245,11 @@ mind when editing:
   *“Coming soon — subject to CQC registration”* sections.
 - 🚫 **No pricing** anywhere — the site invites a friendly, no-obligation chat
   instead.
-- 🚫 **No named service areas / towns / regions** — location language is kept
-  open (“wherever you are”).
+- 📍 **Service area: East London.** The full registered office address
+  (Office 173, 1st Floor, The Type Building, Sugar House Island, 135 High Street,
+  London E15 2TP, UK) appears on the Contact page and in every footer, with a
+  Google Maps directions link. To change it, update the footer block in each
+  `*.html` and the address panel in `contact.html`.
 - ✅ Testimonials are companionship/home-help focused and modest.
 
 If in doubt about any new claim, leave it out.

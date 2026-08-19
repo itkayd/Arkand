@@ -498,6 +498,27 @@ a { color: inherit; }
 .footer-col a:hover { color: var(--gold-light); }
 .footer-contact a { display: inline-flex; align-items: center; gap: 0.5em; }
 
+/* Office address in the footer */
+.footer-address {
+  font-style: normal;
+  display: flex;
+  gap: 0.6em;
+  margin-top: 1.2rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: rgba(250, 248, 244, 0.72);
+}
+.footer-address .fa-pin { flex-shrink: 0; color: var(--gold-light); margin-top: 0.15em; }
+.footer-address .fa-lines strong { display: block; color: rgba(250, 248, 244, 0.9); font-weight: 600; margin-bottom: 0.1em; }
+.footer-directions {
+  display: inline-flex !important;
+  margin-top: 0.5em;
+  color: var(--gold-light) !important;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.footer-area { color: var(--gold-light); font-size: 0.92rem; font-weight: 500; margin-top: 0.35rem; }
+
 .footer-bottom {
   margin-top: var(--space-xl);
   padding-top: var(--space-md);
@@ -1157,6 +1178,33 @@ a { color: inherit; }
 .contact-method .cm-icon svg { width: 22px; }
 .contact-method .cm-label { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--taupe-ink); font-weight: 600; }
 .contact-method .cm-value { font-family: var(--font-head); font-size: 1.35rem; color: var(--forest); }
+
+/* Full office address panel (Contact page) */
+.office-address {
+  font-style: normal;
+  margin-top: var(--space-md);
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-hi);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 2rem);
+}
+.office-address .oa-icon {
+  flex-shrink: 0;
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  background: var(--forest);
+  color: var(--gold-light);
+  display: grid; place-items: center;
+}
+.office-address .oa-icon svg { width: 24px; }
+.office-address .oa-label { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--taupe-ink); font-weight: 600; display: block; margin-bottom: 0.3rem; }
+.office-address .oa-lines { font-size: 1.05rem; line-height: 1.6; color: var(--forest); margin: 0 0 0.7rem; max-width: none; }
 
 /* 13. MOTION / REVEAL UTILITIES ========================================= */
 [data-reveal] {

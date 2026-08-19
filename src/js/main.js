@@ -504,6 +504,17 @@ async function initHero3DIfPresent() {
   const wrap = document.querySelector('[data-hero3d]');
   if (!wrap) return;
   const fallback = wrap.querySelector('.hero-fallback');
+
+  // Respect data-saver and very slow connections: keep the lightweight branded
+  // fallback and never download the ~175KB (gzip) Three.js bundle. Also skip
+  // when motion is reduced — the static mark is the intended experience there.
+  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const slow = conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '') || conn.effectiveType === '3g');
+  if (prefersReduced || slow) {
+    if (fallback) fallback.style.opacity = '1';
+    return;
+  }
+
   try {
     const { initHero3D } = await import('./hero3d.js');
     const controller = await initHero3D(wrap, {
