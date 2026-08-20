@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-label="Arkand Care">
+  <rect width="80" height="80" rx="18" fill="#EDE8DC"/>
+  <path d="M16 66 L38 20 L42 20 L20 66 Z" fill="#132119"/>
+  <path d="M64 66 L42 20 L38 20 L60 66 Z" fill="#132119"/>
+  <path d="M36.9 24 L40 17.4 L43.1 24 Z" fill="#B8892A"/>
+  <rect x="22" y="46" width="36" height="4.4" fill="#B8892A"/>
+</svg>

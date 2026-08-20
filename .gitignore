@@ -1,7 +1,0 @@
-node_modules/
-.DS_Store
-*.log
-.vite/
-
-# NOTE: dist/ is intentionally committed — it is the ready-to-upload
-# deliverable for Hostinger's public_html. Rebuild it with `npm run build`.

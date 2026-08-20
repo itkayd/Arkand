@@ -1,561 +1,373 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-GB">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arkand Care — A friendly helping hand at home</title>
-  <meta name="description" content="Warm, dignified home care from Arkand Care. Companionship and help at home for older people and their families. Get in touch for a friendly, no-obligation chat." />
-  <meta name="theme-color" content="#1B3028" />
-  <link rel="canonical" href="https://arkandcare.co.uk/" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>Arkand Care — A familiar face at the door | Home care in East London</title>
+  <meta name="description" content="Founder-led companionship and help at home in East London. Delivered with dignity. Call 020 8050 0095.">
+  <link rel="canonical" href="https://arkandcare.co.uk/">
 
-  <!-- Favicon -->
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="/arkand-logo.png" />
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Arkand Care">
+  <meta property="og:title" content="A familiar face at the door — home care in East London">
+  <meta property="og:description" content="Companionship and help at home in East London. Delivered with dignity.">
+  <meta property="og:url" content="https://arkandcare.co.uk/">
+  <meta property="og:image" content="https://arkandcare.co.uk/assets/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <meta name="theme-color" content="#122018">
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Arkand Care — A friendly helping hand at home" />
-  <meta property="og:description" content="Warm, dignified companionship and help at home. Delivered with dignity." />
-  <meta property="og:image" content="https://arkandcare.co.uk/arkand-logo.png" />
-  <meta property="og:url" content="https://arkandcare.co.uk/" />
+  <link rel="preload" href="/assets/fonts/dmsans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/playfair.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/cormorant-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/arkand.css">
 
-  <!-- Structured data: Organisation. Service area kept general (East London) and
-       no pricing claims. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Arkand Care Ltd",
-    "url": "https://arkandcare.co.uk",
-    "logo": "https://arkandcare.co.uk/arkand-logo.png",
-    "description": "Warm, dignified home care for older people and their families. Companionship and help at home available now.",
+    "@type": "HomeAndBusinessService",
+    "name": "Arkand Care",
+    "legalName": "Arkand Care Ltd",
+    "url": "https://arkandcare.co.uk/",
+    "image": "https://arkandcare.co.uk/assets/img/og.jpg",
+    "logo": "https://arkandcare.co.uk/assets/img/arkand-mark.png",
+    "telephone": "+44 20 8050 0095",
     "email": "team@arkandcare.co.uk",
-    "telephone": "+442080500095",
-    "areaServed": "East London",
-    "slogan": "Delivered with dignity.",
-    "identifier": "Company No. 17291178",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+442080500095",
-      "email": "team@arkandcare.co.uk",
-      "contactType": "customer service",
-      "availableLanguage": "English",
-      "areaServed": "East London"
-    }
+    "identifier": { "@type": "PropertyValue", "propertyID": "Companies House", "value": "17291178" },
+    "founder": { "@type": "Person", "name": "Abdelkadir Abdirahman", "jobTitle": "Director and Registered Manager" },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Office 173, 1st Floor, The Type Building, Sugar House Island, 135 High Street",
+      "addressLocality": "London",
+      "postalCode": "E15 2TP",
+      "addressCountry": "GB"
+    },
+    "areaServed": { "@type": "Place", "name": "East London" },
+    "openingHours": "Mo-Su 08:00-20:00",
+    "slogan": "Delivered with dignity."
   }
   </script>
-
-  <script type="module" src="/src/js/main.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <!-- Page transition curtain -->
-  <div class="page-curtain" aria-hidden="true">
-    <svg viewBox="0 0 80 88" style="color:#FAF8F4">
-      <path d="M 2 86 L 40 8 L 44 16 L 20 86 Z" fill="currentColor"/>
-      <path d="M 78 86 L 40 8 L 36 16 L 60 86 Z" fill="currentColor"/>
-      <path d="M 36 16 L 40 8 L 44 16 Z" fill="#B8892A"/>
-      <rect x="9" y="51.5" width="62" height="3.5" fill="#B8892A"/>
-    </svg>
-  </div>
-
-  <!-- ===================== HEADER ===================== -->
-  <header class="site-header on-dark">
-    <div class="header-inner">
-      <a class="brand" href="index.html" aria-label="Arkand Care — home">
-        <svg class="logo-mark" viewBox="0 0 80 88" width="34" aria-hidden="true">
-          <path d="M 2 86 L 40 8 L 44 16 L 20 86 Z" fill="currentColor"/>
-          <path d="M 78 86 L 40 8 L 36 16 L 60 86 Z" fill="currentColor"/>
-          <path d="M 36 16 L 40 8 L 44 16 Z" fill="#B8892A"/>
-          <rect x="9" y="51.5" width="62" height="3.5" fill="#B8892A"/>
-        </svg>
-        <span class="brand-name">Arkand Care</span>
+  <header class="header">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="/index.html" aria-label="Arkand Care — home">
+        <img src="/assets/img/arkand-mark.png" alt="" width="34" height="34">
+        <span class="brand__word">Arkand</span>
       </a>
-      <nav class="nav" aria-label="Primary">
-        <ul class="nav-links">
-          <li><a href="index.html" aria-current="page">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="why-arkand.html">Why Arkand</a></li>
-          <li><a href="join-us.html">Join Us</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <a class="nav-call" href="tel:02080500095">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          020 8050 0095
-        </a>
-        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-          <span></span><span></span><span></span>
-        </button>
-      </nav>
-    </div>
+      <ul class="nav__links">
+        <li><a href="/index.html" aria-current="page">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/areas.html">Areas</a></li>
+        <li><a href="/join-us.html">Join us</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <a class="btn btn--primary nav__cta" href="tel:+442080500095">Call 020 8050 0095</a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </nav>
   </header>
 
-  <!-- Mobile menu -->
-  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
-    <a href="index.html" aria-current="page">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="why-arkand.html">Why Arkand</a>
-    <a href="join-us.html">Join Us</a>
-    <a href="contact.html">Contact</a>
-    <a class="mm-call" href="tel:02080500095">Call us · 020 8050 0095</a>
-  </nav>
+  <div class="drawer" id="drawer" data-open="false">
+    <div class="drawer__scrim" data-close></div>
+    <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menu">
+      <button class="drawer__close" type="button" data-close aria-label="Close menu">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <a href="/index.html" aria-current="page">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/services.html">Services</a>
+      <a href="/areas.html">Areas</a>
+      <a href="/join-us.html">Join us</a>
+      <a href="/contact.html">Contact</a>
+      <a class="btn btn--primary" href="tel:+442080500095">Call 020 8050 0095</a>
+    </div>
+  </div>
 
   <main id="main">
-    <!-- ===================== HERO ===================== -->
-    <section class="hero" data-hero3d>
-      <div class="hero-canvas-wrap">
-        <!-- Graceful fallback shown until (or unless) WebGL loads -->
-        <div class="hero-fallback">
-          <svg viewBox="0 0 80 88" role="img" aria-label="Arkand Care">
-            <path d="M 2 86 L 40 8 L 44 16 L 20 86 Z" fill="#FAF8F4"/>
-            <path d="M 78 86 L 40 8 L 36 16 L 60 86 Z" fill="#FAF8F4"/>
-            <path d="M 36 16 L 40 8 L 44 16 Z" fill="#B8892A"/>
-            <rect x="9" y="51.5" width="62" height="3.5" fill="#B8892A"/>
-          </svg>
-        </div>
-      </div>
 
-      <div class="container">
-        <div class="hero-content">
-          <p class="eyebrow" data-hero-item>Companionship &amp; help at home</p>
-          <h1 data-hero-item>A friendly helping hand at&nbsp;home</h1>
-          <p class="hero-sub" data-hero-item>
-            Warm company and a helping hand for older people who’d like a little
-            support to keep living comfortably and independently at home.
-          </p>
-          <div class="hero-actions" data-hero-item>
-            <a class="btn" href="contact.html" data-magnetic>Get in touch <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="btn btn--ghost" href="services.html" data-magnetic>Our services</a>
+    <!-- 1. Threshold hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__shaft" aria-hidden="true"></div>
+      <div class="hero__aperture" aria-hidden="true"></div>
+      <div class="hero__inner">
+        <div class="hero__plate glass glass--deep">
+          <span class="eyebrow reveal-line">Home care in East London</span>
+          <h1 class="display reveal-line" id="hero-title">A familiar face at the door.</h1>
+          <p class="tagline reveal-line">Delivered with dignity.</p>
+          <p class="hero__sub reveal-line">Companionship and help at home in East London.</p>
+          <div class="btn-row reveal-line">
+            <a class="btn btn--primary" href="tel:+442080500095">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5c.5 3 1.7 5.5 3.5 7.3s4.3 3 7.3 3.5l1.7-2.4c.3-.4.8-.6 1.3-.4 1 .3 2 .5 3 .5v3.8c0 .8-.6 1.4-1.4 1.4C11.6 20.6 3.4 12.4 3.4 3.4 3.4 2.6 4 2 4.8 2h3.8c0 1 .2 2 .5 3 .1.5 0 1-.4 1.3z"/></svg>
+              Call 020 8050 0095
+            </a>
+            <a class="btn btn--ghost" href="/contact.html">Get in touch</a>
           </div>
-          <p class="hero-tagline" data-hero-item>Delivered with dignity.</p>
-        </div>
-      </div>
-
-      <div class="scroll-cue" aria-hidden="true">
-        <span>Scroll</span>
-        <span class="line"></span>
-      </div>
-    </section>
-
-    <!-- ===================== INTRO / WHAT WE DO ===================== -->
-    <section class="section">
-      <div class="container narrow center">
-        <p class="eyebrow center" data-reveal>Welcome to Arkand Care</p>
-        <h2 data-reveal>
-          Kind, reliable care that comes to <span class="serif-accent gold">you</span> —
-          the same friendly face, week after week.
-        </h2>
-        <p class="lead" data-reveal>
-          We help older people live well at home with warm companionship and a
-          gentle hand around the house. No hard sell, no long contracts — just
-          good people you can trust. When you’re ready, we’d love a friendly,
-          no-obligation chat.
-        </p>
-      </div>
-    </section>
-
-    <!-- ===================== STATS ===================== -->
-    <section class="section tight zone-parchment">
-      <div class="container">
-        <div class="stats" data-reveal-stagger>
-          <div class="stat">
-            <span class="stat-num"><span data-count="100" data-suffix="%">0%</span></span>
-            <span class="stat-label">A carefully chosen &amp; trusted team</span>
-          </div>
-          <div class="stat">
-            <span class="stat-num"><span data-count="1">0</span></span>
-            <span class="stat-label">Familiar face, visit after visit</span>
-          </div>
-          <div class="stat">
-            <span class="stat-num"><span data-count="30" data-suffix="+">0+</span></span>
-            <span class="stat-label">Minute visits, flexible to suit you</span>
-          </div>
-          <div class="stat">
-            <span class="stat-num">0</span>
-            <span class="stat-label">Long contracts — cancel any time</span>
-          </div>
+          <p class="hero__area">Companionship &amp; help at home, right across East London.</p>
         </div>
       </div>
     </section>
 
-    <!-- ===================== THE THRESHOLD (illustrated feature) ===================== -->
-    <section class="section">
-      <div class="container">
-        <div class="split">
-          <figure class="split-media media-frame" data-reveal>
-            <!-- Branded illustration. To use a real photo, replace this <svg> with:
-                 <img class="media-photo" src="your-photo.jpg" alt="A carer welcomed warmly into a client's home" loading="lazy"> -->
-            <svg class="illus" viewBox="0 0 400 300" role="img" aria-label="Warm light through the window of a welcoming home" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EDE8DC"/><stop offset="1" stop-color="#E3DBC8"/></linearGradient>
-                <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7E7BE"/><stop offset="1" stop-color="#E9C87A"/></linearGradient>
-                <radialGradient id="glow" cx="52%" cy="42%" r="60%"><stop offset="0" stop-color="#F7E6BE" stop-opacity="0.9"/><stop offset="1" stop-color="#F7E6BE" stop-opacity="0"/></radialGradient>
-              </defs>
-              <rect width="400" height="300" fill="url(#wall)"/>
-              <polygon points="118,300 282,300 322,214 78,214" fill="url(#glow)" opacity="0.75"/>
-              <rect x="108" y="46" width="184" height="172" rx="12" fill="#1B3028"/>
-              <rect x="120" y="58" width="160" height="148" rx="6" fill="url(#sky)"/>
-              <path d="M120 176 Q160 148 200 172 T280 164 V206 H120 Z" fill="#B8892A" opacity="0.5"/>
-              <circle cx="236" cy="98" r="17" fill="#FAF8F4" opacity="0.85"/>
-              <rect x="196" y="58" width="8" height="148" fill="#1B3028"/>
-              <rect x="120" y="126" width="160" height="8" fill="#1B3028"/>
-              <rect x="98" y="214" width="204" height="12" rx="4" fill="#1B3028"/>
-              <rect x="150" y="194" width="26" height="20" rx="4" fill="#5C3D52"/>
-              <path d="M176 198 h8 a7 7 0 0 1 0 14 h-8" fill="none" stroke="#5C3D52" stroke-width="4"/>
-              <path d="M158 188 q5 -7 0 -14 M168 188 q5 -7 0 -14" fill="none" stroke="#9C8E82" stroke-width="2.4" stroke-linecap="round" opacity="0.75"/>
-              <rect x="228" y="194" width="22" height="20" rx="3" fill="#B8892A"/>
-              <path d="M239 194 q-14 -18 -22 -26 M239 194 q0 -22 0 -34 M239 194 q14 -18 22 -26" fill="none" stroke="#1B3028" stroke-width="3" stroke-linecap="round"/>
-              <g fill="#CCA040"><circle cx="150" cy="118" r="2.5"/><circle cx="250" cy="150" r="2"/><circle cx="180" cy="168" r="2"/><circle cx="210" cy="108" r="1.6"/></g>
+    <!-- 2. What we do today -->
+    <section class="section" aria-labelledby="today-title">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">Available now</span>
+          <h2 class="display" id="today-title">What we do today</h2>
+          <p class="lead">The everyday help that lets someone stay in their own home, with their own routine — provided today, no waiting.</p>
+        </div>
+        <div class="grid grid--3">
+          <article class="glass card reveal">
+            <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.3-9.2-8.6C1.4 9.6 3 6.5 6 6.5c1.9 0 3.2 1.1 4 2.3.8-1.2 2.1-2.3 4-2.3 3 0 4.6 3.1 3.2 5.9C19 16.7 12 21 12 21z"/></svg></span>
+            <h3 class="display">Companionship</h3>
+            <p>Someone to sit with over a pot of tea, share the news of the day, or simply not be alone in the house. Often the reason a family gets in touch first.</p>
+          </article>
+          <article class="glass card reveal">
+            <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9h14v-9"/><path d="M10 19v-5h4v5"/></svg></span>
+            <h3 class="display">Help at home</h3>
+            <p>Light cleaning, tidying, the laundry and the ironing — the small jobs that quietly get harder, kept on top of so the house stays comfortable.</p>
+          </article>
+          <article class="glass card reveal">
+            <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></span>
+            <h3 class="display">Shopping &amp; prescriptions</h3>
+            <p>The weekly shop, a few things picked up, and prescriptions collected from the pharmacy — so nobody has to go without or make the trip in bad weather.</p>
+          </article>
+          <article class="glass card reveal">
+            <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h16a8 8 0 0 1-16 0z"/><path d="M4 20h16"/><path d="M12 4v3M9 5v2M15 5v2"/></svg></span>
+            <h3 class="display">Simple meal preparation</h3>
+            <p>A hot meal made with the toaster, microwave and air fryer. No oven, no hob, no flame — we tell you that plainly, because it's the honest scope of what we do.</p>
+          </article>
+          <article class="glass card reveal">
+            <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v6l-3 8M12 13l3 8M8 10l4 1 4-1"/></svg></span>
+            <h3 class="display">Accompanied outings</h3>
+            <p>A steady arm to the appointment, the shops, church, or just a walk in the fresh air. Getting out of the house is often the thing that lifts the week.</p>
+          </article>
+          <article class="glass card reveal">
+            <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/><path d="M4 11h16a2 2 0 0 1 2 2v4H2v-4a2 2 0 0 1 2-2z"/><path d="M5 17v3M19 17v3"/></svg></span>
+            <h3 class="display">Respite sitting</h3>
+            <p>Companionship-based sitting so a family carer can keep their own appointment, sleep, or simply leave the house — and come back to someone rested.</p>
+          </article>
+        </div>
+        <p class="reveal" style="margin-top:1.75rem;"><a class="inline-link" href="/services.html">See everything we do &rarr;</a></p>
+      </div>
+    </section>
+
+    <!-- 3. The founder -->
+    <section class="section section--dark" aria-labelledby="founder-title">
+      <div class="wrap">
+        <div class="founder">
+          <div class="founder__photo founder__mark reveal" aria-hidden="true">
+            <svg viewBox="0 0 80 88" width="140" height="154" role="img" aria-label="Arkand Care">
+              <path d="M 2 86 L 40 8 L 44 16 L 20 86 Z" fill="#FAF8F4"/>
+              <path d="M 78 86 L 40 8 L 36 16 L 60 86 Z" fill="#FAF8F4"/>
+              <path d="M 36 16 L 40 8 L 44 16 Z" fill="#CCA040"/>
+              <rect x="9" y="51.5" width="62" height="3.5" fill="#CCA040"/>
             </svg>
-          </figure>
-          <div data-reveal>
-            <p class="eyebrow">The threshold</p>
-            <h2>The moment we’re welcomed&nbsp;in</h2>
-            <p class="lead">There’s a quiet trust in opening your door to someone.
-               It’s the idea our whole company is built around — and a privilege
-               we never take lightly.</p>
-            <p>From the very first hello, we treat your home, your routines and
-               your wishes with real care and respect. Gentle, unhurried, and
-               always on your terms.</p>
-            <a class="link-underline" href="about.html">Read our story <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="reveal">
+            <span class="eyebrow">Founder-led</span>
+            <h2 class="display" id="founder-title">The person responsible for your care is usually the person who answers the phone.</h2>
+            <p class="lead" style="margin-top:1rem;">Arkand was founded by Abdelkadir Abdirahman, who works in care himself and is the company's director and registered manager.</p>
+            <p class="founder__name"><strong>Abdelkadir Abdirahman</strong></p>
+            <p class="founder__role">Director and Registered Manager</p>
+            <p style="margin-top:1.5rem;"><a class="inline-link" href="/about.html">About Arkand &rarr;</a></p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===================== SERVICES CARDS ===================== -->
-    <section class="section" id="services">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">What we do</p>
-          <h2>Everyday help, offered with warmth</h2>
-          <p>Everything we do right now is companionship and practical help at
-             home — the kind that keeps life comfortable, sociable and calm.</p>
+    <!-- 4. A day at home -->
+    <section class="section" aria-labelledby="day-title">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">A day at home</span>
+          <h2 class="display" id="day-title">Light changing through the house</h2>
+          <p class="lead">What a day with us can look like — quiet, unhurried, shaped around the person, not the clock.</p>
         </div>
-
-        <div class="card-grid" data-reveal-stagger>
-          <article class="card">
-            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.5l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 22l7.8-7.7 1-1a5.5 5.5 0 0 0 0-7.7z"/></svg></div>
-            <h3>Companionship</h3>
-            <p>Friendly company and conversation, a cup of tea and a chat, and time spent on the things you enjoy.</p>
+        <div class="day-grid">
+          <article class="day day--dawn reveal">
+            <time>Morning</time>
+            <h3 class="display">Curtains and the kettle</h3>
+            <p>Curtains open, the kettle on, breakfast and the first tablets of the day set out. A calm start beats a rushed one.</p>
           </article>
-          <article class="card">
-            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
-            <h3>Help at Home</h3>
-            <p>Light cleaning and tidying, laundry and ironing, and a gentle hand keeping the home comfortable.</p>
+          <article class="day day--midday reveal">
+            <time>Late morning</time>
+            <h3 class="display">Out and about</h3>
+            <p>A walk to the shop, a lift to the appointment, or the washing hung out while there's a bit of sun. Company for the errands nobody likes doing alone.</p>
           </article>
-          <article class="card">
-            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 2 4 6v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6l-2-4z"/><path d="M4 6h16"/><path d="M9 10a3 3 0 0 0 6 0"/></svg></div>
-            <h3>Shopping &amp; Errands</h3>
-            <p>Shopping, collecting prescriptions and running everyday errands, so nothing feels like a chore.</p>
+          <article class="day day--gold reveal">
+            <time>Afternoon</time>
+            <h3 class="display">Settled and tidy</h3>
+            <p>The ironing done, a warm meal from the air fryer, and time to sit and talk. This is often the part of the visit that matters most.</p>
           </article>
-          <article class="card">
-            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 11h18"/><path d="M12 3a5 5 0 0 1 5 5c0 2-1 3-5 3s-5-1-5-3a5 5 0 0 1 5-5z"/><path d="M5 11v3a7 7 0 0 0 14 0v-3"/><path d="M5 21h14"/></svg></div>
-            <h3>Meal Preparation</h3>
-            <p>Preparing meals and snacks, or simply making sure there’s something warm and nourishing to hand.</p>
-          </article>
-          <article class="card">
-            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="5" r="2.6"/><path d="M12 8v7"/><path d="M8 22l4-7 4 7"/><path d="M6 11h12"/></svg></div>
-            <h3>Accompanied Outings</h3>
-            <p>A friendly companion for walks, trips to the shops, appointments or a favourite place to visit.</p>
-          </article>
-          <article class="card">
-            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 21s-7-4.5-9-9a4.5 4.5 0 0 1 8-3 4.5 4.5 0 0 1 8 3c-1 3-4 6-7 9z"/></svg></div>
-            <h3>Respite for Carers</h3>
-            <p>Stepping in with warm, companionship-based sitting so family carers can take a well-earned break.</p>
+          <article class="day day--evening reveal">
+            <time>Evening</time>
+            <h3 class="display">Lamps on, doors locked</h3>
+            <p>Supper, the lamps on, doors checked and locked. We let the family know how the day went before we leave.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ===================== "A DAY WITH ARKAND" SCROLLYTELLING ===================== -->
-    <section class="scrolly" data-scrolly aria-label="A day with Arkand">
-      <div class="scrolly-sticky">
-        <div class="scrolly-panel">
-          <p class="panel-time">Morning</p>
-          <h3>A warm hello to start the day</h3>
-          <p>We arrive with a smile, open the curtains to the morning light, and put the kettle on for a proper cup of tea and a chat.</p>
+    <!-- 5. Working for the whole family -->
+    <section class="section section--deep" aria-labelledby="family-title">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">For everyone at the table</span>
+          <h2 class="display" id="family-title">Working for the whole family</h2>
+          <p class="lead">When someone starts needing help at home, more than one life changes. We treat the family as the people we work for — not an audience to be updated afterwards.</p>
         </div>
-        <div class="scrolly-panel">
-          <p class="panel-time">Late morning</p>
-          <h3>A gentle hand around the home</h3>
-          <p>A little tidying, the laundry on, the shopping put away — the small things that keep home feeling calm and comfortable.</p>
-        </div>
-        <div class="scrolly-panel">
-          <p class="panel-time">Afternoon</p>
-          <h3>Good company and fresh air</h3>
-          <p>A favourite hobby, a card game, or a gentle walk to the park — time spent together, at your own pace.</p>
-        </div>
-        <div class="scrolly-panel">
-          <p class="panel-time">Evening</p>
-          <h3>Settled, safe and cared for</h3>
-          <p>A warm meal prepared, everything in its place, and a friendly goodbye — with the reassurance that we’ll be back soon.</p>
-        </div>
-        <div class="scrolly-progress" aria-hidden="true">
-          <span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span>
-        </div>
-      </div>
-      <div class="scrolly-spacer"></div>
-    </section>
-
-    <!-- ===================== INTERACTIVE CHOOSER ===================== -->
-    <section class="section zone-parchment" id="chooser">
-      <div class="container">
-        <div class="section-head center" data-reveal>
-          <p class="eyebrow center">A gentle place to start</p>
-          <h2>What kind of help are you looking&nbsp;for?</h2>
-          <p>Choose what feels closest — we’ll show you how we can help. There’s
-             no wrong answer, and never any pressure.</p>
-        </div>
-
-        <div class="chooser" data-chooser data-reveal>
-          <div class="chooser-options" role="group" aria-label="Choose the help you're looking for">
-            <button class="chooser-option" data-help="company" aria-pressed="false">
-              <span class="opt-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.5l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 22l7.8-7.7 1-1a5.5 5.5 0 0 0 0-7.7z"/></svg></span>
-              Company &amp; conversation
-            </button>
-            <button class="chooser-option" data-help="home" aria-pressed="false">
-              <span class="opt-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></span>
-              A hand around the home
-            </button>
-            <button class="chooser-option" data-help="respite" aria-pressed="false">
-              <span class="opt-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 21s-7-4.5-9-9a4.5 4.5 0 0 1 8-3 4.5 4.5 0 0 1 8 3c-1 3-4 6-7 9z"/></svg></span>
-              A break for a family carer
-            </button>
-            <button class="chooser-option" data-help="future" aria-pressed="false">
-              <span class="opt-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-              Personal care (in future)
-            </button>
-          </div>
-          <div class="chooser-result" data-chooser-result aria-live="polite"></div>
+        <div class="grid grid--2">
+          <article class="glass glass--deep card card--deep reveal">
+            <h3 class="display">You hear from us after every visit</h3>
+            <p>What we did, how they seemed, anything worth knowing. You shouldn't have to ring to find out how your mother's day went.</p>
+          </article>
+          <article class="glass glass--deep card card--deep reveal">
+            <h3 class="display">One number, one person</h3>
+            <p>The same familiar voice when you call. Not a call centre, not a ticket, not a different name each time.</p>
+          </article>
+          <article class="glass glass--deep card card--deep reveal">
+            <h3 class="display">We say what we notice</h3>
+            <p>Early, while it's still a small thing. Honest observations are worth more than reassurance.</p>
+          </article>
+          <article class="glass glass--deep card card--deep reveal">
+            <h3 class="display">Respite is for the family carer</h3>
+            <p>So a husband, wife, son or daughter can go to their own appointment, sleep properly, or simply leave the house.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- ===================== HOW IT WORKS ===================== -->
-    <section class="section" id="how-it-works">
-      <div class="container">
-        <div class="section-head center" data-reveal>
-          <p class="eyebrow center">Getting started is easy</p>
-          <h2>How it works</h2>
-          <p>No forms to wrestle with and nothing to commit to. Just a few gentle
-             steps, at your pace.</p>
-        </div>
-        <div class="step-grid" data-reveal-stagger>
-          <div class="step">
-            <span class="step-num">1</span>
-            <h3>Say hello</h3>
-            <p>Give us a ring or drop us a message. We’ll listen, answer your
-               questions, and never rush you.</p>
+    <!-- 6. How our pricing works -->
+    <section class="section" aria-labelledby="pricing-title">
+      <div class="wrap">
+        <div class="grid grid--2" style="align-items:start;gap:clamp(1.5rem,4vw,3rem);">
+          <div class="sec-head reveal" style="margin-bottom:0;">
+            <span class="eyebrow">No surprises</span>
+            <h2 class="display" id="pricing-title">How our pricing works</h2>
+            <p class="lead">We'd rather explain the whole arrangement than tell you to "call for a chat". The only thing we discuss in person is the number itself.</p>
+            <p style="margin-top:1rem;">Your rate is confirmed at the free home visit — with nothing to sign on the day.</p>
           </div>
-          <div class="step">
-            <span class="step-num">2</span>
-            <h3>A friendly visit</h3>
-            <p>We arrange a relaxed, no-obligation chat to understand what would
-               help and what matters most to you.</p>
-          </div>
-          <div class="step">
-            <span class="step-num">3</span>
-            <h3>Meet your companion</h3>
-            <p>We carefully match you with a kind, familiar face — someone we
-               think you’ll genuinely look forward to seeing.</p>
-          </div>
-          <div class="step">
-            <span class="step-num">4</span>
-            <h3>Care that grows with you</h3>
-            <p>Start small and adjust any time. Your visits flex around your
-               life — with no long contracts, ever.</p>
+          <div class="glass card reveal">
+            <ul class="terms">
+              <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span><strong>One clear hourly rate,</strong> agreed in writing before any care starts.</span></li>
+              <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span><strong>A 30-minute minimum visit</strong> — our minimum, not our default.</span></li>
+              <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span><strong>No travel charge.</strong></span></li>
+              <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span><strong>No assessment or set-up fee.</strong></span></li>
+              <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span><strong>No minimum contract and no notice penalty</strong> — change or stop whenever you need to.</span></li>
+              <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span><strong>Itemised invoices,</strong> so you see exactly what was delivered and when.</span></li>
+              <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span><strong>Your rate confirmed at the free home visit,</strong> with nothing to sign on the day.</span></li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===================== WHY ARKAND (FEATURE) ===================== -->
-    <section class="section zone-forest" data-parallax-scope>
-      <div class="container">
-        <div class="split">
-          <div data-reveal>
-            <p class="eyebrow">Why families choose Arkand</p>
-            <h2>Care that feels like it comes from&nbsp;family</h2>
-            <p class="lead">We believe the best care is personal. That means the
-               same familiar faces, genuine kindness, and treating your home and
-               your routines with the respect they deserve.</p>
-            <a class="link-underline" href="why-arkand.html">See what makes us different <span aria-hidden="true">→</span></a>
+    <!-- 7. Where we stand + Coming soon -->
+    <section class="section section--dark" aria-labelledby="cqc-title">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">Honest about scope</span>
+          <h2 class="display" id="cqc-title">Where we stand with the CQC</h2>
+        </div>
+        <div class="glass glass--deep cqc reveal prose">
+          <p>Arkand Care Ltd is registered at Companies House in England and Wales (no. 17291178). We are <strong>not</strong> registered with the Care Quality Commission, and we do not provide personal care.</p>
+          <p>Companionship, help around the home, shopping, simple meal preparation and accompanied outings are not regulated activities, and we provide them today. Washing, dressing and medication <strong>are</strong> regulated, and we will not offer them until we are registered to.</p>
+          <p>We would rather tell you what we cannot do than be vague about what we can.</p>
+        </div>
+
+        <div class="coming reveal" style="margin-top:2rem;">
+          <span class="coming__tag">Coming soon — subject to CQC registration</span>
+          <div class="prose" style="margin-top:1.25rem;">
+            <p>Personal care, dementia support, medication support and night care are regulated services. We will offer them once the Care Quality Commission has registered us, and not before.</p>
+            <p>If you'd like us to let you know when that happens, say so and we will.</p>
           </div>
-          <ul class="values-list" data-reveal-stagger>
-            <li><span class="v-num">01</span><div><h3>Kind &amp; reliable</h3><p>A warm, dependable local team who turn up when they say they will.</p></div></li>
-            <li><span class="v-num">02</span><div><h3>Familiar faces</h3><p>The same trusted people each visit — never a stranger at the door.</p></div></li>
-            <li><span class="v-num">03</span><div><h3>Flexible to suit you</h3><p>Visits arranged around your life and routines, not the other way round.</p></div></li>
-            <li><span class="v-num">04</span><div><h3>Dignity, always</h3><p>Respectful, unhurried care that puts your comfort and choices first.</p></div></li>
+          <ul class="coming__list">
+            <li>Personal care (washing, dressing)</li>
+            <li>Dementia support</li>
+            <li>Medication support</li>
+            <li>Night &amp; overnight care</li>
           </ul>
+          <p style="margin-top:1.5rem;"><a class="inline-link" href="/contact.html">Register your interest &rarr;</a></p>
         </div>
       </div>
     </section>
 
-    <!-- ===================== ASPIRATION (illustrative, not a client quote) ===================== -->
-    <section class="section">
-      <div class="container">
-        <div class="quote-block" data-reveal>
-          <span class="quote-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>The same friendly face each week — someone to look forward
-            to, who makes home feel a little warmer.</blockquote>
-          <cite>— The difference we set out to make, every visit</cite>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== COMING SOON ===================== -->
-    <section class="section zone-deep">
-      <div class="container">
-        <div class="coming-soon" data-reveal>
-          <span class="badge">Coming soon — subject to CQC registration</span>
-          <h2>More ways to help, once we’re registered</h2>
-          <p class="lead">We’re completing our CQC registration so we can offer
-             personal care in the future. These services aren’t available just
-             yet — but we’d be glad to note your interest and keep you posted.</p>
-          <ul class="soon-list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Personal care</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Dementia support</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Medication support</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Night &amp; overnight care</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Hospital discharge support</li>
-          </ul>
-          <a class="btn" href="contact.html" data-magnetic>Register your interest <span class="arrow" aria-hidden="true">→</span></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== FAQ ===================== -->
-    <section class="section" id="faq">
-      <div class="container">
-        <div class="section-head center" data-reveal>
-          <p class="eyebrow center">Good to know</p>
-          <h2>Questions families often ask</h2>
-          <p>Can’t see what you’re wondering about? We’d be glad to talk it
-             through — just <a class="link-underline" href="contact.html">get in touch</a>.</p>
-        </div>
-        <div class="faq" data-reveal>
-          <details class="faq-item">
-            <summary>Will it be the same person each visit? <span class="faq-icon" aria-hidden="true"></span></summary>
-            <div class="faq-answer"><p>Wherever we possibly can, yes. We believe familiar faces are at the heart of good care, so we work hard to send the same kind, trusted companion each time — someone you’ll get to know and look forward to seeing.</p></div>
-          </details>
-          <details class="faq-item">
-            <summary>Do we have to sign a long contract? <span class="faq-icon" aria-hidden="true"></span></summary>
-            <div class="faq-answer"><p>Not at all. There are no long contracts and no tie-ins. You can start small, change things, or pause whenever you need to. Care should fit around your life, never the other way round.</p></div>
-          </details>
-          <details class="faq-item">
-            <summary>Do you cover my area? <span class="faq-icon" aria-hidden="true"></span></summary>
-            <div class="faq-answer"><p>The best thing to do is get in touch. Tell us a little about where you are and what you need, and we’ll happily let you know how we can help.</p></div>
-          </details>
-          <details class="faq-item">
-            <summary>Are you registered with the CQC? <span class="faq-icon" aria-hidden="true"></span></summary>
-            <div class="faq-answer"><p>We’re a registered company with policies and practices built to care-sector standards. We’re currently completing our registration with the Care Quality Commission so we can offer personal care in the future. Right now we provide companionship and help at home, which don’t require CQC registration — and we’ll always be honest about that.</p></div>
-          </details>
-          <details class="faq-item">
-            <summary>Can you help with personal care, like washing or dressing? <span class="faq-icon" aria-hidden="true"></span></summary>
-            <div class="faq-answer"><p>Not just yet. Personal care is a regulated service, so we’ll only offer it once our CQC registration is complete. In the meantime we’re glad to note your interest, and to help with companionship and practical support around the home.</p></div>
-          </details>
-          <details class="faq-item">
-            <summary>How do we get started? <span class="faq-icon" aria-hidden="true"></span></summary>
-            <div class="faq-answer"><p>Simply call us on <a class="link-underline" href="tel:02080500095">020 8050 0095</a> or send a message. We’ll have a warm, no-obligation chat, arrange a friendly visit to understand what would help, and take it gently from there.</p></div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== CTA BANNER ===================== -->
-    <section class="section zone-forest">
-      <div class="container">
-        <div class="cta-banner" data-reveal>
-          <p class="eyebrow center">A friendly, no-obligation chat</p>
-          <h2>Let’s talk about how we can help</h2>
-          <p class="lead">Whether you’re just looking into things or ready to
-             begin, we’re always happy to talk — kindly, clearly, and with no
-             pressure at all.</p>
-          <div class="cta-actions">
-            <a class="btn" href="tel:02080500095" data-magnetic>Call 020 8050 0095</a>
-            <a class="btn btn--ghost" href="contact.html" data-magnetic>Get in touch</a>
+    <!-- 8. Contact -->
+    <section class="section" aria-labelledby="contact-title">
+      <div class="wrap">
+        <div class="grid grid--2" style="align-items:center;gap:clamp(1.5rem,4vw,3rem);">
+          <div class="reveal">
+            <span class="eyebrow">The next step</span>
+            <h2 class="display" id="contact-title">Start with a conversation</h2>
+            <p class="lead" style="margin-top:1rem;">Ring the number and you'll speak to the person accountable for the care. Or ask for a free home visit — we come to you, at no cost, with nothing to sign.</p>
+            <div class="btn-row" style="margin-top:1.5rem;">
+              <a class="btn btn--primary" href="tel:+442080500095">Call 020 8050 0095</a>
+              <a class="btn btn--ghost" href="/contact.html">Send an enquiry</a>
+            </div>
           </div>
-          <p class="tagline" style="margin-top:2rem; font-size:1.5rem;">Delivered with dignity.</p>
+          <div class="glass card reveal">
+            <ul class="contact-lines">
+              <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5c.5 3 1.7 5.5 3.5 7.3s4.3 3 7.3 3.5l1.7-2.4c.3-.4.8-.6 1.3-.4 1 .3 2 .5 3 .5v3.8c0 .8-.6 1.4-1.4 1.4C11.6 20.6 3.4 12.4 3.4 3.4 3.4 2.6 4 2 4.8 2h3.8c0 1 .2 2 .5 3 .1.5 0 1-.4 1.3z"/></svg></span><a href="tel:+442080500095">020 8050 0095</a></li>
+              <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><a href="mailto:team@arkandcare.co.uk">team@arkandcare.co.uk</a></li>
+              <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span>East London</span></li>
+            </ul>
+            <p class="note" style="margin-top:1.25rem;">We've kept the area deliberately tight. A carer stuck in traffic is a carer who isn't with you. <a class="inline-link" href="/areas.html">See where we work &rarr;</a></p>
+          </div>
         </div>
       </div>
     </section>
+
   </main>
 
-  <!-- ===================== FOOTER ===================== -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <svg viewBox="0 0 80 88" width="44" role="img" aria-label="Arkand Care" style="color:#FAF8F4">
-            <path d="M 2 86 L 40 8 L 44 16 L 20 86 Z" fill="currentColor"/>
-            <path d="M 78 86 L 40 8 L 36 16 L 60 86 Z" fill="currentColor"/>
-            <path d="M 36 16 L 40 8 L 44 16 Z" fill="#B8892A"/>
-            <rect x="9" y="51.5" width="62" height="3.5" fill="#B8892A"/>
-          </svg>
-          <span class="brand-name">Arkand Care</span>
-          <p>Warm, dignified companionship and help at home for older people and the families who love them.</p>
-          <p class="footer-tagline">Delivered with dignity.</p>
-          <p class="footer-area">Proudly serving East London.</p>
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__grid">
+        <div>
+          <a class="footer__brand" href="/index.html"><img src="/assets/img/arkand-mark.png" alt="" width="34" height="34" loading="lazy" decoding="async"><span>Arkand Care</span></a>
+          <p>Companionship and help at home in East London.</p>
         </div>
-        <div class="footer-col">
+        <div class="footer__nav">
           <h4>Explore</h4>
           <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="why-arkand.html">Why Arkand</a></li>
-            <li><a href="join-us.html">Join Us</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/services.html">Services</a></li>
+            <li><a href="/areas.html">Areas</a></li>
+            <li><a href="/join-us.html">Join us</a></li>
+            <li><a href="/contact.html">Contact</a></li>
           </ul>
         </div>
-        <div class="footer-col">
-          <h4>Our help</h4>
+        <div>
+          <h4>Trust &amp; care</h4>
           <ul>
-            <li><a href="services.html">Companionship</a></li>
-            <li><a href="services.html">Help at home</a></li>
-            <li><a href="services.html">Shopping &amp; errands</a></li>
-            <li><a href="services.html">Meal preparation</a></li>
-            <li><a href="services.html">Respite for carers</a></li>
+            <li><a href="/privacy.html">Privacy notice</a></li>
+            <li><a href="/accessibility.html">Accessibility</a></li>
+            <li><a href="/complaints.html">Complaints &amp; safeguarding</a></li>
           </ul>
-        </div>
-        <div class="footer-col footer-contact">
-          <h4>Get in touch</h4>
-          <ul>
-            <li><a href="tel:02080500095"><svg viewBox="0 0 24 24" width="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 020 8050 0095</a></li>
-            <li><a href="mailto:team@arkandcare.co.uk"><svg viewBox="0 0 24 24" width="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg> team@arkandcare.co.uk</a></li>
-            <li><a href="contact.html">Send us a message</a></li>
-          </ul>
-          <address class="footer-address">
-            <span class="fa-pin"><svg viewBox="0 0 24 24" width="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-            <span class="fa-lines">
-              <strong>Main Office</strong>
-              Office 173, 1st Floor, The Type Building,<br />
-              Sugar House Island, 135 High Street,<br />
-              London E15 2TP, United Kingdom
-              <a class="footer-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=The%20Type%20Building%2C%20Sugar%20House%20Island%2C%20135%20High%20Street%2C%20London%20E15%202TP" target="_blank" rel="noopener">Get directions →</a>
-            </span>
-          </address>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p class="compliance-note">Company No. 17291178 · Companionship &amp; home help · Personal care coming soon, subject to CQC registration.</p>
-        <p>&copy; <span data-year>2026</span> Arkand Care Ltd. All rights reserved.</p>
+      <div class="footer__legal">
+        <span class="tagline">Delivered with dignity.</span>
+        Arkand Care Ltd · Registered in England and Wales · Company no. 17291178<br>
+        Main office: Office 173, 1st Floor, The Type Building, Sugar House Island, 135 High Street, London E15 2TP ·
+        <a href="tel:+442080500095">020 8050 0095</a> ·
+        <a href="mailto:team@arkandcare.co.uk">team@arkandcare.co.uk</a> ·
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=The%20Type%20Building%2C%20Sugar%20House%20Island%2C%20135%20High%20Street%2C%20London%20E15%202TP" target="_blank" rel="noopener">Get directions</a>
+        <p style="margin-top:0.5rem;">Companionship &amp; home help · Personal care coming soon, subject to CQC registration.</p>
+        <p style="margin-top:0.75rem;">© <span id="year">2026</span> Arkand Care Ltd. Arkand Care Ltd is registered at Companies House in England and Wales. We are not registered with the Care Quality Commission and do not provide personal care.</p>
       </div>
     </div>
   </footer>
-  <!-- Sticky mobile call bar (phones only) — keeps click-to-call one tap away -->
-  <div class="mobile-call-bar">
-    <a class="btn" href="tel:02080500095">Call us</a>
-    <a class="btn btn--ghost" href="contact.html">Get in touch</a>
-  </div>
+
+  <script src="/assets/js/arkand.js" defer></script>
 </body>
 </html>
